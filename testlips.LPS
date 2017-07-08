@@ -1,0 +1,23 @@
+<name="main", function="
+= #str[.0] .97;
+? if == #str[.0] .96;
+	! write 'we are in the if\n';
+	! write 'still in it\n';
+# elseif && == #str[.0] .97 == .1 .1;
+	! write 'we are in the elseif\n';
+# else;
+	! write 'we are in the else\n';
+?;
+= $i ! facto ( .5 );
+! write $i '\n';
+/! my_putstr ( #str );
+/! write '\n';
+= $nb #str;
+/! ascii $nb[.0] '\n';
+! my_putstr ( $nb );
+! write '\n';
+= $test + $nb #str;
+! my_putstr ( $test );
+! write '\n';
+! return .1;
+", nb="2">
