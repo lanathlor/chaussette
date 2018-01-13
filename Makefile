@@ -69,7 +69,7 @@ OBJS_TEST	= $(SRCS:.c=.o) \
 
 #CFLAGS		+= -W -Wall -Werror -Wextra
 
-CPPFLAGS	+= -Iincludes -Ilib/my
+CFLAGS		+= -Iincludes -Ilib/my
 
 all		: $(NAME)
 
