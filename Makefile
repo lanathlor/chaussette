@@ -53,9 +53,9 @@ SRCS		= src_Chaussette/tool.c \
 		  src_Chaussette/getVar.c \
 		  src_Chaussette/getALLvar.c
 
-MAIN_TEST 		= main_test.c
+MAIN_TEST 		= main/main_test.c
 
-MAIN 			= main.c
+MAIN 			= main/main.c
 
 OBJS		= $(SRCS:.c=.o) \
 			  $(LIPS:.c=.o) \
@@ -85,6 +85,7 @@ clean		:
 
 fclean		: clean
 		  $(RM) $(NAME)
+		  $(RM) $(NAME_TEST)
 
 re		: fclean all
 

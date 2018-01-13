@@ -67,10 +67,10 @@ int freeVar(t_var *var)
   while (var[i].name)
   {
     if (var[i].name != NULL)
-	   free(var[i].name);
-    var[i].name = NULL;
-    free(var[i].value);
-    var[i].value = NULL;
+//	   free(var[i].name);
+ //   var[i].name = NULL;
+//    free(var[i].value);
+  //  var[i].value = NULL;
     i++;
   }
   if (var)
@@ -107,7 +107,7 @@ void addInt(int *nb, char *name)
   mem.var_fromC[len].name = my_strcpy(mem.var_fromC[len].name, name, FAILURE);
   if ((mem.var_fromC[len].value = malloc(sizeof(int))) == NULL)
       perrorPars(NULL, M_FAIL);
-  *(int *)mem.var_fromC[len].value = *(int *)nb;
+  mem.var_fromC[len].value = (int *)nb;
   mem.var_fromC[len].type = _int;
   mem.var_fromC[len + 1].name = NULL;
   mem.var_fromC[len + 1].type = _null;
@@ -122,7 +122,7 @@ void addChar(char *nb, char *name)
   mem.var_fromC[len].name = my_strcpy(mem.var_fromC[len].name, name, FAILURE);
   if ((mem.var_fromC[len].value = malloc(sizeof(char))) == NULL)
       perrorPars(NULL, M_FAIL);
-  *(char *)mem.var_fromC[len].value = *(char *)nb;
+  mem.var_fromC[len].value = (char *)nb;
   mem.var_fromC[len].type = _char;
   mem.var_fromC[len + 1].name = NULL;
   mem.var_fromC[len + 1].type = _null;

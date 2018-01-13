@@ -35,6 +35,7 @@ int		main (int ac, char **av)
   code = InItem(item, "function");
   printf("ret = %d\n", chaussette(code));
   freeMem();
+  printf("str = %s\n", str);
   //freeCodex(codex);
   freeInfo();
   freeItem(item);

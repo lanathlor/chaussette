@@ -164,9 +164,9 @@ int memCopy(t_var *new, t_var *var)
     if ((new[i].value = malloc(sizeof(int))) == NULL)
           my_perror(M_FAIL);
     if (var[i].type == _char)
-      *(char *)new[i].value = *(char *)var[i].value;
+      new[i].value = (char *)(var[i].value);
     else
-      *(int *)new[i].value = *(int *)var[i].value;
+      new[i].value = (int *)(var[i].value);
     new[i].type = var[i].type;
     i++;
   }
@@ -183,7 +183,7 @@ t_var *memRealloc(t_var *var)
   if ((new = malloc(sizeof(t_var) * (memLen(var) + 2))) == NULL)
     my_perror(M_FAIL);
   memCopy(new, var);
-  freeVar(var);
+//  freeVar(var);
   new[memLen(new) + 1].name = NULL;
   new[memLen(new) + 1].value = 0;
   new[memLen(new) + 1].type = _null;
@@ -228,9 +228,9 @@ t_var *memAdd(t_var *var, t_var add)
   if ((new[len].value = malloc(sizeof(int))) == NULL)
         my_perror(M_FAIL);
   if (add.type == _int)
-    *(int *)new[len].value = *(int *)add.value;
+    new[len].value = (int *)add.value;
   else
-    *(char *)new[len].value = *(char *)add.value;
+    new[len].value = (char *)add.value;
   new[len].type = add.type;
   new[len + 1].name = NULL;
   new[len + 1].value = 0;
