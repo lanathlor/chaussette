@@ -12,7 +12,7 @@ CP		= cp
 
 CC		= gcc -g3
 
-RM		= del /S
+RM		= rm -rf
 
 MKDIR		= mkdir
 
@@ -80,7 +80,8 @@ test		: $(OBJS_TEST)
 		  $(CC) $(OBJS_TEST) -o $(NAME_TEST)
 
 clean		:
-		  $(RM) *.o
+		  $(RM) $(OBJS)
+		  $(RM) $(OBJS_TEST)
 
 fclean		: clean
 		  $(RM) $(NAME)
