@@ -1,5 +1,5 @@
 #ifndef CHAUSSETTE_H_
-# define CHAUSSETTE_H_
+	#define CHAUSSETTE_H_
 
 #include "usable.h"
 #include "equal.h"
@@ -11,14 +11,14 @@
 #include "Operat.h"
 #include "condHandle.h"
 #include "getALLvar.h"
-
+#include "isJustInt.h"
 // define
 #define SYN_ERR ("is not a syntax")
 #define EMPTY_STR ("nothing after")
 
 // function
 /* initialize the memories structures. Needed */
-void initMem();
+void initMem(void);
 
 /* free the variable structure */
 int freeVar(t_var *var);
@@ -27,7 +27,7 @@ int freeVar(t_var *var);
 int freeStack(t_stack *stack);
 
 /* free the entire memorie */
-void freeMem();
+void freeMem(void);
 
 /* add a variable from C of type int */
 void addInt(int *nb, char *name);
@@ -46,5 +46,6 @@ void readLeadFile(char *file);
 int chaussette(char *code);
 
 void showMem(t_var *var);
+void showAllMem(void);
 
 #endif

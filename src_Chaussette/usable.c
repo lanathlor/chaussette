@@ -62,11 +62,11 @@ static char **my_strtowordtab(const char *str, char **word, char delim)
   s = ZERO;
   while (str[s])
     {
-      if (is_alpha(str[s], delim) == SUCCESS)
+      if (is_alpha(str[s], delim) == SUCCESS && is_alpha(str[s], '\t') == SUCCESS)
          word[i] = my_realloc(word[i], str[s++]);
       else
       {
-        while (is_alpha(str[s++], delim) == FAILURE)
+        while (is_alpha(str[s++], delim) == FAILURE || is_alpha(str[s++], '\t') == FAILURE)
          ;
        s--;
        if (my_strlen(word[i]) >= 1)
@@ -74,6 +74,8 @@ static char **my_strtowordtab(const char *str, char **word, char delim)
        }
     }
   word[i + ONE] = ZERO;
+  printf("word : ");
+  my_puttab(word);
   return (word);
 }
 

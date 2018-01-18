@@ -72,7 +72,7 @@ void initSyntax(void)
 	varSyn[2].var = &toC;
 	varSyn[2].type = &TtoC;
 	varSyn[2].struc = &VtoC;
-	varSyn[3].str = ".";
+	varSyn[3].str = "";
 	varSyn[3].var = &catchInt;
 	interrupt[0].str = "=";
 	interrupt[0].fctn = &equal;

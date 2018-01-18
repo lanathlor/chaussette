@@ -51,7 +51,8 @@ SRCS		= src_Chaussette/tool.c \
 		  src_Chaussette/getFunc.c \
 		  src_Chaussette/condHandle.c \
 		  src_Chaussette/getVar.c \
-		  src_Chaussette/getALLvar.c
+		  src_Chaussette/getALLvar.c \
+		  src_Chaussette/isJustInt.c
 
 MAIN_TEST 		= main/main_test.c
 

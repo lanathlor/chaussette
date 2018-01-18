@@ -38,7 +38,15 @@ void showMem(t_var *var)
   }
 }
 
-void initMem()
+void showAllMem(void)
+{
+    my_putstr("to C :\n");
+    showMem(mem.var_toC);
+    my_putstr("from C :\n");
+    showMem(mem.var_fromC);
+}
+
+void initMem(void)
 {
   if ((mem.var_fromC = malloc(sizeof(t_var) * 1)) == NULL)
     my_perror(M_FAIL);
@@ -84,7 +92,7 @@ int freeStack(t_stack *stack)
   return (SUCCESS);
 }
 
-void freeMem()
+void freeMem(void)
 {
   if (mem.var_fromC)
     freeVar(mem.var_fromC);

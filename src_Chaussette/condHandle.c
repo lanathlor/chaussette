@@ -27,15 +27,24 @@ static int isElseIf(char **split)
 static int goInIf(char **split, char **words)
 {
 	int ret;
+	int nest;
 
 	ret = 0;
+	nest = 0;
 	parseer.line++;
-	while (split[parseer.line] && split[parseer.line][0] != '?' && split[parseer.line][0] != '#')
+	while (split[parseer.line] && (my_strcmp(split[parseer.line], "?endif") != SUCCESS || nest != 0) && split[parseer.line][0] != '#')
 	{
+		if (my_strcmp(split[parseer.line], "?endif") == SUCCESS){
+			nest--;
+		} else if (split[parseer.line][0] == '?') {
+			nest++;
+		}
+		printf("split : %s\n", split[parseer.line]);
+		printf("nest : %d\n", nest);
 		ret = parsing(split);
 		parseer.line++;
 	}
-	while (split[parseer.line] && split[parseer.line][0] != '?')
+	while (split[parseer.line] && my_strcmp(split[parseer.line], "?endif") != SUCCESS)
 		parseer.line++;
 	parseer.check = SUCCESS;
 	return (ret);
@@ -44,7 +53,7 @@ static int goInIf(char **split, char **words)
 static int findOtherStatment(char **split, char **words)
 {
 	parseer.line++;
-	while (split[parseer.line] && split[parseer.line][0] != '?')
+	while (split[parseer.line] && my_strcmp(split[parseer.line], "?endif") != SUCCESS)
 	{
 		if (my_strcmp(split[parseer.line], "# else") == SUCCESS)
 			return (goInIf(split, words));

@@ -52,8 +52,8 @@ char *getOnlyName(char *words, char **parse)
   while (words[i])
     {
       if (words[i] == '[')
-	{
-	  name = getRank(name, words, &i + 1, inc);
+      	{
+    name = getRank(name, words, &i + 1, inc);
 	  inc = my_strlen(name);
 	  name = my_realloc(name, 0);
 	  while (words[i] != ']')
@@ -184,12 +184,16 @@ static int lookVar(char **words)
 
   testNULL(words);
   comp = 0;
+  if (isJustInt(words[parseer.words])){
+      parseer.check = SUCCESS;
+      return (my_getnbr(words[parseer.words], FAILURE));
+  }
   hash = getOnlyName(words[parseer.words], words);
   while (comp < NB_VAR)
     {
       if (words[parseer.words][0] == varSyn[comp].str[0])
 		{
-		  parseer.check = SUCCESS;
+      parseer.check = SUCCESS;
 		  adr = varSyn[comp].var(hash);
 	  	  return (*adr);
 		}
@@ -264,6 +268,9 @@ t_type getType(char **words)
 
   comp = 0;
   type = _null;
+  if (isJustInt(words[parseer.words])){
+    return (_int);
+  }
   hash = getOnlyName(words[parseer.words], words);
   while (comp != NB_TYPE)
   {

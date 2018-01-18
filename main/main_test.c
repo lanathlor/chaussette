@@ -17,12 +17,12 @@ int		main (int ac, char **av)
   char *str;
 
   nb = 2;
-  i = open("try.file", O_WRONLY);
+  i = 3;
   str = my_strcpy(str, "hello world", FAILURE);
   initMem();
-  setFileLink("./testlips.LPS");
+  setFileLink("./chaussette_file/testlips.LPS");
   setItemInfo("name", "main");
-  readLeadFile(NULL);
+  readLeadFile("chaussette_file/leadfile.cht");
   // codex = initCodex("caster target", "lanath", "try");
   // codex = addInCodex(codex, "target", "test");
   addInt(&nb, "nb");
@@ -34,6 +34,7 @@ int		main (int ac, char **av)
   //talkative(item, codex);
   code = InItem(item, "function");
   printf("ret = %d\n", chaussette(code));
+  showAllMem();
   freeMem();
   printf("str = %s\n", str);
   //freeCodex(codex);
