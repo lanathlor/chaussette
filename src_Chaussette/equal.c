@@ -3,7 +3,7 @@
 #include "libmy.h"
 #include "Chaussette.h"
 
-static char *getRank(char *name, char *words, int *i, int inc)
+static char *getRank(char *name, char *words, int *i)
 {
   char **tmp;
   char *str;
@@ -38,7 +38,7 @@ static char *getRank(char *name, char *words, int *i, int inc)
   return (name);
 }
 
-char *getOnlyName(char *words, char **parse)
+char *getOnlyName(char *words)
 {
   char *name;
   int i;
@@ -53,7 +53,7 @@ char *getOnlyName(char *words, char **parse)
     {
       if (words[i] == '[')
       	{
-    name = getRank(name, words, &i + 1, inc);
+    name = getRank(name, words, &i + 1);
 	  inc = my_strlen(name);
 	  name = my_realloc(name, 0);
 	  while (words[i] != ']')
@@ -108,7 +108,7 @@ static int *lookVarForAdr(char **words)
 	testNULL(words);
 	adr = 0;
 	comp = 0;
-	hash = getOnlyName(words[parseer.words], words);
+	hash = getOnlyName(words[parseer.words]);
 	while (comp < NB_VAR)
 	{
 		if (words[parseer.words][0] == varSyn[comp].str[0])
@@ -148,6 +148,7 @@ static int execOp(char **words)
 
   parseer.check = FAILURE;
   res = 0;
+  op = NULL;
   op = my_strcpy(op, words[parseer.words], FAILURE);
   i = 0;
   j = 0;
@@ -188,7 +189,7 @@ static int lookVar(char **words)
       parseer.check = SUCCESS;
       return (my_getnbr(words[parseer.words], FAILURE));
   }
-  hash = getOnlyName(words[parseer.words], words);
+  hash = getOnlyName(words[parseer.words]);
   while (comp < NB_VAR)
     {
       if (words[parseer.words][0] == varSyn[comp].str[0])
@@ -271,7 +272,7 @@ t_type getType(char **words)
   if (isJustInt(words[parseer.words])){
     return (_int);
   }
-  hash = getOnlyName(words[parseer.words], words);
+  hash = getOnlyName(words[parseer.words]);
   while (comp != NB_TYPE)
   {
     if (words[parseer.words][0] == varSyn[comp].str[0])
@@ -339,17 +340,16 @@ static void equalize(void *adr_op1, int val_op2, t_type type)
 int equal(char **split, char **words)
 {
   void *adr_op1;
-  char *name;
   int val_op2;
   int tmp;
   int tmp2;
   t_type type;
 
+  split++;
   type = _null;
   tmp = parseer.words;
   adr_op1 = getAdr(words);
   type = getType(words);
-  name = my_hashstr(words[parseer.words], 1, my_strlen(words[parseer.words]), FAILURE);
   val_op2 = getVal(words);
   tmp2 = parseer.words;
   parseer.words = tmp;

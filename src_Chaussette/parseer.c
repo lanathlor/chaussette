@@ -106,27 +106,6 @@ void initSyntax(void)
 	ptr[11].op = &ou;
 }
 
-static int freeVarL(t_var *var)
-{
-  int i;
-
-  if (var == NULL)
-    return (FAILURE);
-  i = 0;
-  while (var[i].name)
-    {
-      if (var[i].name != NULL)
-         free(var[i].name);
-      var[i].name = NULL;
-      free(var[i].value);
-      i++;
-    }
-  if (var)
-    free(var);
-  var = NULL;
-  return (SUCCESS);
-}
-
 int chaussette(char *code)
 {
 	char **splitCode;

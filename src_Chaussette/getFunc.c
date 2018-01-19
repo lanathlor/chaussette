@@ -201,6 +201,7 @@ int getFunc(char **split, char **words)
 	int keep_cond;
 	int ret;
 
+	item = NULL;
 	testNULL(words);
 	setBuiltIn(built_in);
 	ret = execBuiltIn(split, words, built_in);

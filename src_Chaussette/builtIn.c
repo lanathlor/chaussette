@@ -72,6 +72,7 @@ int asciiChaussetteAt(char **split, char **words)
 	int fd;
 
 	prompt = 0;
+	split++;
 	parseer.words++;
 	testNULL(words);
 	fd = getVal(words);
@@ -98,6 +99,7 @@ int writeChaussetteAt(char **split, char **words)
 	int fd;
 
 	prompt = 0;
+	split++;
 	parseer.words++;
 	testNULL(words);
 	fd = getVal(words);
@@ -123,6 +125,7 @@ int asciiChaussette(char **split, char **words)
 	int prompt;
 
 	prompt = 0;
+	split++;
 	parseer.words++;
 	testNULL(words);
 	parseer.words++;
@@ -148,6 +151,7 @@ int writeChaussette(char **split, char **words)
 	int val;
 
 	prompt = 0;
+	split++;
 	parseer.words++;
 	testNULL(words);
 	parseer.words++;
@@ -190,6 +194,7 @@ int readFrom(char **split, char **words)
 	int ret;
 
 	parseer.words++;
+	split++;
 	ret = read(getVal(words), &letter, ONE);
 	parseer.check = SUCCESS;
 	if (ret == 0)

@@ -14,11 +14,13 @@ static char	*my_reallocParseer(char *str, char buff)
     my_perror(M_FAIL);
   i = ZERO;
   if (str != NULL)
+  {
     while (str[i] != '\0')
       {
-	tmp[i] = str[i];
-	i = i + ONE;
+        	tmp[i] = str[i];
+          i = i + ONE;
       }
+    }
     tmp[i] = buff;
     tmp[i + ONE] = '\0';
     free(str);
@@ -216,7 +218,6 @@ void testNULL(char **words)
 t_var *memAdd(t_var *var, t_var add)
 {
   t_var *new;
-  int   tmp;
   int   len;
 
   if ((new = malloc(sizeof(t_var) * (memLen(var) + 2))) == NULL)

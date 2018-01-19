@@ -24,7 +24,7 @@ static int isElseIf(char **split)
 	return (FAILURE);
 }
 
-static int goInIf(char **split, char **words)
+static int goInIf(char **split)
 {
 	int ret;
 	int nest;
@@ -48,15 +48,15 @@ static int goInIf(char **split, char **words)
 	return (ret);
 }
 
-static int findOtherStatment(char **split, char **words)
+static int findOtherStatment(char **split)
 {
 	parseer.line++;
 	while (split[parseer.line] && my_strcmp(split[parseer.line], "?endif") != SUCCESS)
 	{
 		if (my_strcmp(split[parseer.line], "# else") == SUCCESS)
-			return (goInIf(split, words));
+			return (goInIf(split));
 		else if (isElseIf(split) == SUCCESS)
-			return (goInIf(split, words));
+			return (goInIf(split));
 		parseer.line++;
 	}
 	parseer.check = SUCCESS;
@@ -78,6 +78,6 @@ int condHandle(char **split, char **words)
 	}
 	val = getVal(words);
 	if (val == 1)
-		return (goInIf(split, words));
-	return (findOtherStatment(split, words));	
+		return (goInIf(split));
+	return (findOtherStatment(split));	
 }

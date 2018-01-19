@@ -89,6 +89,7 @@ int freeVar(t_var *var)
 
 int freeStack(t_stack *stack)
 {
+  (void) stack;
   return (SUCCESS);
 }
 

@@ -10,14 +10,17 @@
 int		main (int ac, char **av)
 {
   t_item *item;
-  t_codex *codex;
+//  t_codex *codex;
   char *code;
   int nb;
   int i;
   char *str;
 
+  ac++;
+  (void) av;
   nb = 2;
   i = 3;
+  str = NULL;
   str = my_strcpy(str, "hello world", FAILURE);
   initMem();
   setFileLink("./chaussette_file/testlips.LPS");

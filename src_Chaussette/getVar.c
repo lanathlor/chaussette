@@ -60,7 +60,8 @@ t_var *getVar(char **words)
 
   testNULL(words);
   comp = 0;
-  hash = getOnlyName(words[parseer.words], words);
+  var = NULL;
+  hash = getOnlyName(words[parseer.words]);
   while (comp < NB_VAR)
     {
       if (words[parseer.words][0] == varSyn[comp].str[0])

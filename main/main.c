@@ -11,6 +11,7 @@ int		main (int ac, char **av)
 {
   t_item *item;
 
+  ac++;
   initMem();
   if (av[1] == NULL)
   {

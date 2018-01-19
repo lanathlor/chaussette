@@ -131,11 +131,13 @@ char	*my_reallocItem(char *str, char buff)
     my_perror(M_FAIL);
   i = ZERO;
   if (str != NULL)
+  {
     while (str[i] != '\0')
       {
-	tmp[i] = str[i];
-	i = i + ONE;
+      	 tmp[i] = str[i];
+	       i = i + ONE;
       }
+    }
     tmp[i] = buff;
     tmp[i + ONE] = '\0';
     free(str);

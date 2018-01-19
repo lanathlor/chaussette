@@ -4,7 +4,7 @@
 #include "usable.h"
 
 //function
-char *getOnlyName(char *words, char **parse);
+char *getOnlyName(char *words);
 int *getAdr(char **words);
 int getVal(char **words);
 t_type getType(char **words);

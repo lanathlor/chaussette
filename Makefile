@@ -68,7 +68,7 @@ OBJS_TEST	= $(SRCS:.c=.o) \
 			  $(LIBS:.c=.o) \
 			  $(MAIN_TEST:.c=.o)
 
-#CFLAGS		+= -W -Wall -Werror -Wextra
+CFLAGS		+= -W -Wall -Werror -Wextra
 
 CFLAGS		+= -Iincludes -Ilib/my
 
