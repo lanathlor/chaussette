@@ -46,6 +46,7 @@ char	**my_strtab(const char *str);
 /*
 ** my_hashstr.c
 */
+int 	my_find_last(char *str, char c);
 char	*my_hashstr(char *str, int i, int j, int free_ck);
 
 /*

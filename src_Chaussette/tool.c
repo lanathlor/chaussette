@@ -219,18 +219,20 @@ int *getInt(char *name)
 }
 
 // gestion fonction //
-
+#include <stdio.h>
 void readLeadFile(char *file)
 {
 	int fd;
 	char *str;
+  char *path;
 
-	if (!file)
-		file = "./leadfile.cht";
-	if ((fd = open(file, O_RDONLY)) == FAILURE)
-		my_perror(O_FAIL);
-	if ((parseer.include = malloc(sizeof (char *))) == NULL)
-		my_perror(M_FAIL);
+  if (!file)
+    file = "./leadfile.cht";
+  if ((fd = open(file, O_RDONLY)) == FAILURE)
+    my_perror(O_FAIL);
+  if ((parseer.include = malloc(sizeof (char *))) == NULL)
+    my_perror(M_FAIL);
+  path = my_hashstr(file, 0, my_find_last(file, '/'), FAILURE);
 	parseer.include[0] = NULL;
 	str = gnl(fd);
 	while (my_strcmp(str, "FILE FUNCTION START") == FAILURE && str != NULL)

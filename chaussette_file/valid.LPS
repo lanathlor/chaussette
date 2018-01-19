@@ -1,5 +1,7 @@
 <name="main", function="
-= $test .5;
+! write 'hello world!\n';
+! write 1111111 '\n';
+= $test 5;
 ! write ! facto ( $test ) '\n';
-! return .1;
+! return 1;
 ", nb="2">

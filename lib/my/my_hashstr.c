@@ -12,6 +12,24 @@
 #include <stdlib.h>
 #include "libmy.h"
 
+int my_find_last(char *str, char c)
+{
+  int i;
+  int ret;
+
+  i = 0;
+  ret = FAILURE;
+  if (!str)
+    return (FAILURE);
+  while (str[i])
+  {
+    if (str[i] == c)
+      ret = i;
+    i++;
+  }
+  return (ret);
+}
+
 char	*my_hashstr(char *str, int i, int j, int free_ck)
 {
   int	inc;

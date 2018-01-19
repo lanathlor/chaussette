@@ -25,7 +25,7 @@ int		main (int ac, char **av)
   initMem();
   setFileLink("./chaussette_file/testlips.LPS");
   setItemInfo("name", "main");
-  readLeadFile("chaussette_file/leadfile.cht");
+  readLeadFile("./chaussette_file/leadfile.cht");
   // codex = initCodex("caster target", "lanath", "try");
   // codex = addInCodex(codex, "target", "test");
   addInt(&nb, "nb");
