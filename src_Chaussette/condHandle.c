@@ -39,8 +39,6 @@ static int goInIf(char **split, char **words)
 		} else if (split[parseer.line][0] == '?') {
 			nest++;
 		}
-		printf("split : %s\n", split[parseer.line]);
-		printf("nest : %d\n", nest);
 		ret = parsing(split);
 		parseer.line++;
 	}

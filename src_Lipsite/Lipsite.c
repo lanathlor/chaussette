@@ -158,7 +158,7 @@ static char	*gnlItem(int fd)
         str = my_reallocItem(str, buff);
         while (read(fd, &buff, ONE) > ZERO && buff != '"')
           {
-            if (buff != '\n')
+            if (buff != '\n' && buff != '\t')
               str = my_reallocItem(str, buff);
           }
         str = my_reallocItem(str, '"');
