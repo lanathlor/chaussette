@@ -146,6 +146,8 @@ static t_item *haveFunc(char **words, t_item *item)
 	parseer.words++;
 	testNULL(words);
 	setItemInfo("name", words[parseer.words]);
+	if (parseer.include == NULL || parseer.include[0] == NULL)
+		perrorPars(words, "There is no function file loaded");
 	while (parseer.include[inc])
 	{
 		item = createItem();

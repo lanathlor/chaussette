@@ -233,21 +233,22 @@ void readLeadFile(char *file)
   if ((parseer.include = malloc(sizeof (char *))) == NULL)
     my_perror(M_FAIL);
   path = my_hashstr(file, 0, my_find_last(file, '/'), FAILURE);
-	parseer.include[0] = NULL;
-	str = gnl(fd);
-	while (my_strcmp(str, "FILE FUNCTION START") == FAILURE && str != NULL)
-	{
-		free(str);
-		str = gnl(fd);
-	}
-	str = gnl(fd);
-	while (my_strcmp(str, "FILE FUNCTION END") == FAILURE && str != NULL)
-	{
-		if (str[0] != '/')
-			parseer.include = reallocTab(parseer.include, str);
-		free(str);
-		str = gnl(fd);
-	}
+  path++;
+  parseer.include[0] = NULL;
+  str = gnl(fd);
+  while (my_strcmp(str, "FILE FUNCTION START") == FAILURE && str != NULL)
+  {
+    free(str);
+    str = gnl(fd);
+  }
+  str = gnl(fd);
+  while (my_strcmp(str, "FILE FUNCTION END") == FAILURE && str != NULL)
+  {
+    if (str[0] != '/')
+      parseer.include = reallocTab(parseer.include, str);
+    free(str);
+    str = gnl(fd);
+  }
 	free(str);
 	close(fd);
 }

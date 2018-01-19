@@ -7,6 +7,27 @@
 #include "lipsite.h"
 #include "Chaussette.h"
 
+static t_item *haveFunc(t_item *item)
+{
+  int inc;
+
+  inc = 0;
+  setItemInfo("name", "main");
+  if (parseer.include == NULL || parseer.include[0] == NULL)
+    my_perror("There is no function file loaded");
+  while (parseer.include[inc])
+  {
+    item = createItem();
+    setFileLink(parseer.include[inc]);
+    if ((item = findItem(item)) != NULL)
+      return (item);
+    freeItem(item);
+    inc++;
+  }
+  my_perror("There is no main function defined\n");
+  return (NULL);
+}
+
 int		main (int ac, char **av)
 {
   t_item *item;
@@ -15,22 +36,14 @@ int		main (int ac, char **av)
   initMem();
   if (av[1] == NULL)
   {
-    my_puterror("Need a file with a main\n");
+    my_puterror("Need a leadfile with a .cht extension");
     my_puterror("press enter to exit\n");
     free(gnl(0));
     return (FAILURE);
   }
-  setFileLink(av[1]);
-  setItemInfo("name", "main");
-  readLeadFile(NULL);
+  readLeadFile(av[1]);
   item = createItem();
-  if ((item = findItem(item)) == NULL)
-  {
-    my_puterror("Need a main function\n");
-    my_puterror("press enter to exit\n");
-    free(gnl(0));
-    return (FAILURE);
-  }
+  item = haveFunc(item);
   chaussette(InItem(item, "function"));
   freeMem();
   freeInfo();
