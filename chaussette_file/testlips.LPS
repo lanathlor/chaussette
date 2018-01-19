@@ -2,9 +2,9 @@
 = #str[0] 97;
 ? if == #str[0] 97;
 	! write 'we are in the if\n';
-	? if == 1 1;
-		! write 'we are in a neasted if\n';
-	?endif;
+//	? if == 1 1;
+//		! write 'we are in a neasted if\n';
+//	?endif;
 	! write 'still in it\n';
 # elseif && == #str[0] 97 == 1 1;
 	! write 'we are in the elseif\n';
