@@ -225,6 +225,7 @@ void readLeadFile(char *file)
 	int fd;
 	char *str;
   char *path;
+  char *incl;
 
   if (!file)
     file = "./leadfile.cht";
@@ -233,7 +234,6 @@ void readLeadFile(char *file)
   if ((parseer.include = malloc(sizeof (char *))) == NULL)
     my_perror(M_FAIL);
   path = my_hashstr(file, 0, my_find_last(file, '/'), FAILURE);
-  path++;
   parseer.include[0] = NULL;
   str = gnl(fd);
   while (my_strcmp(str, "FILE FUNCTION START") == FAILURE && str != NULL)
@@ -241,12 +241,18 @@ void readLeadFile(char *file)
     free(str);
     str = gnl(fd);
   }
+  printf("path : %s\n", path);
   str = gnl(fd);
   while (my_strcmp(str, "FILE FUNCTION END") == FAILURE && str != NULL)
   {
-    if (str[0] != '/')
-      parseer.include = reallocTab(parseer.include, str);
-    free(str);
+    if (str[0] != '/'){
+      incl = my_strcpy(incl, path, FAILURE);
+      incl = my_strcat(incl, "/", FAILURE);
+      incl = my_strcat(incl, str, FAILURE);
+      parseer.include = reallocTab(parseer.include, incl);
+    }
+    free(incl);
+    incl = NULL;
     str = gnl(fd);
   }
 	free(str);
