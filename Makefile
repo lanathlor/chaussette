@@ -1,14 +1,16 @@
-CP		= cp
-
 CC		= gcc -g3
 
 RM		= rm -rf
 
+GIT 		= git
+
+CP 		= cp -rf
+
 MKDIR		= mkdir
 
-NAME		= interpreteur
+NAME		= chaussette
 
-NAME_TEST   = lol
+NAME_TEST 	= lol
 
 LIBS 		= lib/my/gnl.c \
 		  lib/my/my_putstr.c \
@@ -71,9 +73,9 @@ test		: $(OBJS_TEST)
 		  $(CC) $(OBJS_TEST) -o $(NAME_TEST)
 
 install 	: re
-		  cp $(NAME) /bin
-		  cp $(NAME) /usr/bin
-		  cp $(NAME) /usr/sbin
+		  $(CP) $(NAME) /bin
+		  $(CP) $(NAME) /usr/bin
+		  $(CP) $(NAME) /usr/sbin
 
 uninstall 	: fclean
 		  $(RM) /bin/$(NAME)
@@ -81,12 +83,12 @@ uninstall 	: fclean
 		  $(RM) /usr/sbin/$(NAME)
 
 update		:
-		  git pull
+		  $(GIT) pull
 
 push 		:
-		  git add --all
-		  git commit -am "new"
-		  git push
+		  $(GIT) add --all
+		  $(GIT) commit -am "new"
+		  $(GIT) push
 
 clean		:
 		  $(RM) $(OBJS)
