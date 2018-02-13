@@ -1,13 +1,3 @@
-##
-## Makefile for GofLife in /home/aragon_m/CPE_colle_semaine7
-## 
-## Made by My-Lan Aragon
-## Login   <aragon_m@epitech.net>
-## 
-## Started on  Tue Jun  7 19:00:26 2016 My-Lan Aragon
-## Last update Fri Dec 23 14:52:12 2016 vivier valentin
-##
-
 CP		= cp
 
 CC		= gcc -g3
@@ -40,7 +30,7 @@ LIBS 		= lib/my/gnl.c \
 LIPS 		= src_Lipsite/talkative.c \
 		  src_Lipsite/Lipsite.c
 
-SRCS		= src_Chaussette/tool.c \
+SRCS		= src_Chaussette/external.c \
 		  src_Chaussette/usable.c \
 		  src_Chaussette/findVar.c \
 		  src_Chaussette/findType.c \
@@ -79,6 +69,24 @@ $(NAME)		: $(OBJS)
 
 test		: $(OBJS_TEST)
 		  $(CC) $(OBJS_TEST) -o $(NAME_TEST)
+
+install 	: re
+		  cp $(NAME) /bin
+		  cp $(NAME) /usr/bin
+		  cp $(NAME) /usr/sbin
+
+uninstall 	: fclean
+		  $(RM) /bin/$(NAME)
+		  $(RM) /usr/bin/$(NAME)
+		  $(RM) /usr/sbin/$(NAME)
+
+update		:
+		  git pull
+
+push 		:
+		  git add --all
+		  git commit -am "new"
+		  git push
 
 clean		:
 		  $(RM) $(OBJS)

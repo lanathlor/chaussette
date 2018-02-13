@@ -219,7 +219,6 @@ int *getInt(char *name)
 }
 
 // gestion fonction //
-#include <stdio.h>
 void readLeadFile(char *file)
 {
 	int fd;
@@ -241,7 +240,6 @@ void readLeadFile(char *file)
     free(str);
     str = gnl(fd);
   }
-  printf("path : %s\n", path);
   str = gnl(fd);
   while (my_strcmp(str, "FILE FUNCTION END") == FAILURE && str != NULL)
   {

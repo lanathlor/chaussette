@@ -45,6 +45,5 @@ int		main (int ac, char **av)
   freeItem(item);
   free(str);
   my_putstr("press enter to exit\n");
-  gnl(0);
   return (0);
 }

@@ -224,7 +224,7 @@ int getFunc(char **split, char **words)
 		memCopy(mem.var_local, dumpLLocal(new, InItem(item, "arguments")));
 		if (parseer.verbose)
 		{
-			my_putstr("Function : ");
+			my_putstr("\nFunction : ");
 			my_putstr(InItem(item, "name"));
 			my_putstr("\n");
 		}
@@ -241,10 +241,20 @@ int getFunc(char **split, char **words)
 		parseer.line = keep_line;
 		parseer.words = keep_word;
 		parseer.cond = keep_cond;
-		freeItem(item);
 		freeVar(var);
 		freeVar(new);
 		freeInfo();
+		if (parseer.verbose)
+		{
+			my_putstr("\nexit function : ");
+			my_putstr(InItem(item, "name"));
+			my_putstr("\n");
+		}
+		if (parseer.verbose == 2)
+		{
+			showMem(mem.var_local);
+		}
+		freeItem(item);
 	}
 	parseer.check = SUCCESS;
 	return (ret);
