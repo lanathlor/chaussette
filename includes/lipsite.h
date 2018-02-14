@@ -47,4 +47,8 @@ void promptItem(t_item *item);
 /* can return NULL */
 t_item *createItem(void);
 
+/* transform the info into an item */
+/* no error handeling yet, by awar */
+t_item	*getInfo(t_item *item, char *info);
+
 #endif

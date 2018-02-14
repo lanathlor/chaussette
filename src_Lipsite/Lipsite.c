@@ -220,7 +220,7 @@ static int	getStruct(t_item *item, char *info, int elem, int i)
   return (i);
 }
 
-static t_item	*getInfo(t_item *item, char *info)
+t_item	*getInfo(t_item *item, char *info)
 {
   int		i;
   int		elem;

@@ -7,6 +7,18 @@
 #include "lipsite.h"
 #include "Chaussette.h"
 
+void  dump(void * mem)
+{
+  char *str = mem;
+  int i;
+  
+  i = 0;
+  while (str[i]){
+    my_putnbr(str[i]);
+    i++;
+  }
+}
+
 int		main (int ac, char **av)
 {
   t_item *item;
@@ -37,9 +49,10 @@ int		main (int ac, char **av)
   //talkative(item, codex);
   code = InItem(item, "function");
   printf("ret = %d\n", chaussette(code));
-  showAllMem();
-  freeMem();
+  dump((void *)&parseer);
+  dump(code);
   printf("str = %s\n", str);
+  freeMem();
   //freeCodex(codex);
   freeInfo();
   freeItem(item);

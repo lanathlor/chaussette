@@ -3,9 +3,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include "libmy.h"
-#include "lipsite.h"
-#include "Chaussette.h"
+#include <libmy.h>
+#include <lipsite.h>
+#include <Chaussette.h>
 
 static t_item *haveFunc(t_item *item)
 {

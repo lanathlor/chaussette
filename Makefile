@@ -12,6 +12,10 @@ NAME		= chaussette
 
 NAME_TEST 	= lol
 
+NAME_COMPIL 	= compilator
+
+NAME_INT 	= int
+
 LIBS 		= lib/my/gnl.c \
 		  lib/my/my_putstr.c \
 		  lib/my/my_strlen.c \
@@ -50,15 +54,22 @@ MAIN_TEST 		= main/main_test.c
 
 MAIN 			= main/main.c
 
+MAIN_COMP 		= main/compile.c
+
+MAIN_INT 		= main/inter.c
+
 OBJS		= $(SRCS:.c=.o) \
 			  $(LIPS:.c=.o) \
-			  $(LIBS:.c=.o) \
-			  $(MAIN:.c=.o)
+			  $(LIBS:.c=.o)
 
-OBJS_TEST	= $(SRCS:.c=.o) \
-			  $(LIPS:.c=.o) \
-			  $(LIBS:.c=.o) \
-			  $(MAIN_TEST:.c=.o)
+OBJS_MAIN	= $(MAIN:.c=.o)
+
+OBJS_TEST	= $(MAIN_TEST:.c=.o)
+
+OBJS_COMP	= $(MAIN_COMP:.c=.o)
+
+OBJS_INT	= $(MAIN_INT:.c=.o)
+
 
 CFLAGS		+= -W -Wall -Werror -Wextra
 
@@ -67,19 +78,46 @@ CFLAGS		+= -Iincludes -Ilib/my
 all		: $(NAME)
 
 $(NAME)		: $(OBJS)
-		  $(CC) $(OBJS) -o $(NAME)
+		  $(CC) $(OBJS) $(OBJS_MAIN) $(CFLAGS) -o $(NAME)
 
 test		: $(OBJS_TEST)
-		  $(CC) $(OBJS_TEST) -o $(NAME_TEST)
+		  $(CC) $(OBJS) $(OBJS_TEST) $(CFLAGS) -o $(NAME_TEST)
 
-install 	: re
+comp		: $(OBJS_COMP)
+		  $(CC) $(OBJS) $(OBJS_COMP) $(CFLAGS) -o $(NAME_COMPIL)
+
+int		: $(OBJS_INT)
+		  $(CC) $(OBJS) $(OBJS_INT) $(CFLAGS) -o $(NAME_INT)
+
+linked 		:
+		  $(CC) $(SRCS) $(LIPS) $(LIBS) $(CFLAGS) -o lib$(NAME).so -fPIC -shared
+		  $(CC) $(SRCS) $(LIPS) $(LIBS) $(CFLAGS) -o lib$(NAME).so.1 -fPIC -shared
+
+install 	: re linked
 		  $(CP) $(NAME) /bin
+		  $(RM) /usr/include/chaussette
+		  $(MKDIR) /usr/include/chaussette
+		  $(CP) Makefile /usr/include/chaussette/.
+		  $(CP) src_Chaussette /usr/include/chaussette/src_Chaussette
+		  $(CP) src_Lipsite /usr/include/chaussette/src_Lipsite
+		  $(CP) includes/*.h /usr/include/chaussette/.
+		  $(CP) lib /usr/include/chaussette/lib
+		  $(CP) main/main.c /usr/include/chaussette/.
+		  $(CP) includes/Chaussette.h /usr/include/.
+		  $(CP) libchaussette.so* /usr/include/chaussette/.
+		  $(CP) libchaussette.so* /usr/lib/.
+		  $(CP) libchaussette.so* /lib/.
 		  $(CP) $(NAME) /usr/bin
 		  $(CP) $(NAME) /usr/sbin
+		  ldconfig
 
 uninstall 	: fclean
 		  $(RM) /bin/$(NAME)
+		  $(RM) /usr/include/chaussette
+		  $(RM) /usr/include/chaussette.h
 		  $(RM) /usr/bin/$(NAME)
+		  $(RM) /usr/lib/libchaussette.so*
+		  $(RM) /lib/libchaussette.so
 		  $(RM) /usr/sbin/$(NAME)
 
 update		:
@@ -96,7 +134,11 @@ clean		:
 
 fclean		: clean
 		  $(RM) $(NAME)
+		  $(RM) lib$(NAME).so
+		  $(RM) lib$(NAME).so.1
 		  $(RM) $(NAME_TEST)
+		  $(RM) $(NAME_COMPIL)
+		  $(RM) $(NAME_INT)
 
 re		: fclean all
 
