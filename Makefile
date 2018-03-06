@@ -48,15 +48,16 @@ SRCS		= src_Chaussette/external.c \
 		  src_Chaussette/condHandle.c \
 		  src_Chaussette/getVar.c \
 		  src_Chaussette/getALLvar.c \
-		  src_Chaussette/isJustInt.c
+		  src_Chaussette/isJustInt.c \
+		  src_Chaussette/getValue.c
 
 MAIN_TEST 		= main/main_test.c
 
-MAIN 			= main/main.c
+MAIN 			= main/interpreter.c
 
-MAIN_COMP 		= main/compile.c
+MAIN_COMP 		= main/ChaussetteCompiler.c
 
-MAIN_INT 		= main/inter.c
+MAIN_INT 		= main/ReadComp.c
 
 OBJS		= $(SRCS:.c=.o) \
 			  $(LIPS:.c=.o) \
@@ -75,23 +76,22 @@ CFLAGS		+= -W -Wall -Werror -Wextra
 
 CFLAGS		+= -Iincludes -Ilib/my
 
-all		: $(NAME)
-
-$(NAME)		: $(OBJS)
+$(NAME)		: $(OBJS) $(OBJS_MAIN)
 		  $(CC) $(OBJS) $(OBJS_MAIN) $(CFLAGS) -o $(NAME)
 
-test		: $(OBJS_TEST)
+all		: $(NAME) test comp int linked
+
+test		: $(OBJS_TEST) $(OBJS)
 		  $(CC) $(OBJS) $(OBJS_TEST) $(CFLAGS) -o $(NAME_TEST)
 
-comp		: $(OBJS_COMP)
+comp		: $(OBJS_COMP) $(OBJS)
 		  $(CC) $(OBJS) $(OBJS_COMP) $(CFLAGS) -o $(NAME_COMPIL)
 
-int		: $(OBJS_INT)
+int		: $(OBJS_INT) $(OBJS)
 		  $(CC) $(OBJS) $(OBJS_INT) $(CFLAGS) -o $(NAME_INT)
 
-linked 		:
-		  $(CC) $(SRCS) $(LIPS) $(LIBS) $(CFLAGS) -o lib$(NAME).so -fPIC -shared
-		  $(CC) $(SRCS) $(LIPS) $(LIBS) $(CFLAGS) -o lib$(NAME).so.1 -fPIC -shared
+linked 		: $(OBJS)
+		  $(CC) $(OBJS) $(CFLAGS) -o lib$(NAME).dll -shared
 
 install 	: re linked
 		  $(CP) $(NAME) /bin
@@ -131,15 +131,17 @@ push 		:
 clean		:
 		  $(RM) $(OBJS)
 		  $(RM) $(OBJS_TEST)
+		  $(RM) $(OBJS_MAIN)
+		  $(RM) $(OBJS_INT)
+		  $(RM) $(OBJS_COMP)
 
 fclean		: clean
 		  $(RM) $(NAME)
-		  $(RM) lib$(NAME).so
-		  $(RM) lib$(NAME).so.1
+		  $(RM) lib$(NAME).dll
 		  $(RM) $(NAME_TEST)
 		  $(RM) $(NAME_COMPIL)
 		  $(RM) $(NAME_INT)
 
-re		: fclean all
+re		: fclean $(NAME)
 
 .PHONY		: all clean fclean re

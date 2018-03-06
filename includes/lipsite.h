@@ -1,4 +1,4 @@
-#ifndef LIPSITE_H
+#ifndef LIPSITE_H_
 # define LIPSITE_H_
 
 #include "inner.h"
@@ -48,7 +48,10 @@ void promptItem(t_item *item);
 t_item *createItem(void);
 
 /* transform the info into an item */
-/* no error handeling yet, by awar */
-t_item	*getInfo(t_item *item, char *info);
+t_item	*getInfo(char *info);
+
+p_item *reallocItem(p_item *item, p_item add);
+
+p_item readItem(void);
 
 #endif

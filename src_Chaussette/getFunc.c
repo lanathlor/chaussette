@@ -157,6 +157,7 @@ static t_item *haveFunc(char **words, t_item *item)
 		freeItem(item);
 		inc++;
 	}
+	freeInfo();
 	perrorPars(words, "is not referenced as an existant function");
 	return (NULL);
 }

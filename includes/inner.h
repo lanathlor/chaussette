@@ -11,6 +11,8 @@ typedef struct s_item
   char	*value;
 }	       t_item;
 
+typedef t_item* p_item;
+
 typedef struct s_info
 {
   char	*item_elem;

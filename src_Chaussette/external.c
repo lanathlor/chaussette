@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "libmy.h"
 #include "Chaussette.h"
+#include "lipsite.h"
 
 t_mem mem;
 
@@ -219,6 +220,21 @@ int *getInt(char *name)
 }
 
 // gestion fonction //
+
+static p_item *getAllItem(char *file)
+{
+  p_item item;
+
+  setFileLink(file);
+  while((item = readItem()) != NULL){
+    parseer.items = reallocItem(parseer.items, item);
+    freeItem(item);
+  }
+  freeInfo();
+  freeItem(item);
+  return (parseer.items);
+}
+
 void readLeadFile(char *file)
 {
 	int fd;
@@ -232,8 +248,11 @@ void readLeadFile(char *file)
     my_perror(O_FAIL);
   if ((parseer.include = malloc(sizeof (char *))) == NULL)
     my_perror(M_FAIL);
-  path = my_hashstr(file, 0, my_find_last(file, '/'), FAILURE);
   parseer.include[0] = NULL;
+  path = my_hashstr(file, 0, my_find_last(file, '/'), FAILURE);
+  /*if ((parseer.items = malloc(sizeof (p_item *))) == NULL)
+    my_perror(M_FAIL);
+  parseer.items[0] = NULL;*/
   str = gnl(fd);
   while (my_strcmp(str, "FILE FUNCTION START") == FAILURE && str != NULL)
   {
@@ -248,6 +267,7 @@ void readLeadFile(char *file)
       incl = my_strcat(incl, "/", FAILURE);
       incl = my_strcat(incl, str, FAILURE);
       parseer.include = reallocTab(parseer.include, incl);
+      parseer.items = getAllItem(incl);
     }
     free(incl);
     incl = NULL;

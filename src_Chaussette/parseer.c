@@ -111,6 +111,7 @@ int chaussette(char *code)
 	char **splitCode;
 	int ret;
 
+	
 	if (code == NULL)
 	{
 		parseer.check = FAILURE;
@@ -128,6 +129,11 @@ int chaussette(char *code)
 			showMem(mem.var_toC);
 			my_putstr("local :\n");
 			showMem(mem.var_local);
+		}
+		if (parseer.verbose == 1)
+		{
+			my_putstr(splitCode[parseer.line]);
+			my_putchar('\n');
 		}
 		ret = parsing(splitCode);
 		parseer.cond = FAILURE;

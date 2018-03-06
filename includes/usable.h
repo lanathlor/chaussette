@@ -1,7 +1,7 @@
 #ifndef USABLE_H_
 # define USABLE_H_
 
-//#include "lipsite.h"
+#include "lipsite.h"
 
 # define NB_VAR (4)
 # define NB_BOOL (3)
@@ -20,6 +20,7 @@ typedef struct s_func
 typedef struct s_parseer
 {
   char **include;
+  p_item *items;
   t_func *function;
   int line;
   int words;

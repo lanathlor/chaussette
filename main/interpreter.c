@@ -19,8 +19,10 @@ static t_item *haveFunc(t_item *item)
   {
     item = createItem();
     setFileLink(parseer.include[inc]);
-    if ((item = findItem(item)) != NULL)
+    if ((item = findItem(item)) != NULL){
+      freeInfo();
       return (item);
+    }
     freeItem(item);
     inc++;
   }

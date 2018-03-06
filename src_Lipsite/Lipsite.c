@@ -220,25 +220,6 @@ static int	getStruct(t_item *item, char *info, int elem, int i)
   return (i);
 }
 
-t_item	*getInfo(t_item *item, char *info)
-{
-  int		i;
-  int		elem;
-
-  i = ZERO;
-  elem = ZERO;
-  freeItem(item);
-  while (info[i] != '>')
-    {
-      item = reallocStructItem(item);
-      i = getStruct(item, info, elem, i);
-      elem++;
-    }
-  item[elem].element = NULL;
-  item[elem].value = NULL;
-  return (item);
-}
-
 static char	*findInDoc(t_info item_info)
 {
   char		*tmp;
@@ -397,13 +378,35 @@ void promptItem(t_item *item)
   }
 }
 
+t_item  *getInfo(char *info)
+{
+  int   i;
+  int   elem;
+  t_item *item;
+
+  i = ZERO;
+  elem = ZERO;
+  if (info == NULL)
+    return (NULL);
+  item = createItem();
+  while (info[i] != '>')
+    {
+      item = reallocStructItem(item);
+      i = getStruct(item, info, elem, i);
+      elem++;
+    }
+  item[elem].element = NULL;
+  item[elem].value = NULL;
+  return (item);
+}
+
 t_item  *findItem(t_item *item)
 {
   char  *info;
 
   if ((info = findInDoc(item_info)) == NULL)
     return (NULL);
-  item = getInfo(item, info);
+  item = getInfo(info);
   free(info);
   return (item);
 }
@@ -480,4 +483,64 @@ int     verifyMagicNb(void)
   if (generatMagicNb() == my_getnbr(tmp, SUCCESS))
     return (SUCCESS);
   return (FAILURE);
+}
+
+static p_item copyItem(t_item *item)
+{
+  t_item *newItem;
+  int i;
+
+  i = 0;
+  if (item == NULL)
+    return (NULL);  
+  newItem = createItem();
+  while (item[i].element && item[i].value){
+    newItem = reallocStructItem(newItem);
+    newItem[i].element = my_strcpy(newItem[i].element, item[i].element, FAILURE);
+    newItem[i].value = my_strcpy(newItem[i].value, item[i].value, FAILURE);
+    i++;
+  }
+  newItem[i].element = NULL;
+  newItem[i].value = NULL;
+  return (newItem);
+}
+
+static  int getLenOfItem(p_item *item)
+{
+  int i;
+
+  i = 0;
+  if (item == NULL)
+    return (-1);
+  while (item[i])
+    i++;
+  return (i);
+}
+
+p_item *reallocItem(p_item *item, p_item add)
+{
+  p_item *newItem;
+  int i;
+
+  i = 0;
+  if ((newItem = malloc(sizeof(p_item) * (getLenOfItem(item) + 2))) == NULL)
+    my_perror(M_FAIL);
+  while (item && item[i]){
+    newItem[i] = copyItem(item[i]);
+    i++;
+  }
+  newItem[i] = copyItem(add);
+  newItem[i + 1] = NULL;
+  return(newItem);
+}
+
+p_item readItem(void)
+{
+  p_item item;
+  char *str;
+
+  item = createItem();
+  str = gnlItem(item_info.fd);
+  item = getInfo(str);
+  return (item);
 }
