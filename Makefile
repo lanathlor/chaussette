@@ -72,7 +72,7 @@ OBJS_COMP	= $(MAIN_COMP:.c=.o)
 OBJS_INT	= $(MAIN_INT:.c=.o)
 
 
-CFLAGS		+= -W -Wall -Werror -Wextra
+CFLAGS		+= -W -Wall -Werror -Wextra -fPIC
 
 CFLAGS		+= -Iincludes -Ilib/my
 
@@ -91,7 +91,8 @@ int		: $(OBJS_INT) $(OBJS)
 		  $(CC) $(OBJS) $(OBJS_INT) $(CFLAGS) -o $(NAME_INT)
 
 linked 		: $(OBJS)
-		  $(CC) $(OBJS) $(CFLAGS) -o lib$(NAME).dll -shared
+		  $(CC) $(OBJS) $(CFLAGS) -o lib$(NAME).so -shared -fPIC
+		  $(CC) $(OBJS) $(CFLAGS) -o lib$(NAME).so.1 -shared -fPIC
 
 install 	: re linked
 		  $(CP) $(NAME) /bin
@@ -102,7 +103,7 @@ install 	: re linked
 		  $(CP) src_Lipsite /usr/include/chaussette/src_Lipsite
 		  $(CP) includes/*.h /usr/include/chaussette/.
 		  $(CP) lib /usr/include/chaussette/lib
-		  $(CP) main/main.c /usr/include/chaussette/.
+		  $(CP) main/interpreter.c /usr/include/chaussette/.
 		  $(CP) includes/Chaussette.h /usr/include/.
 		  $(CP) libchaussette.so* /usr/include/chaussette/.
 		  $(CP) libchaussette.so* /usr/lib/.
@@ -137,7 +138,8 @@ clean		:
 
 fclean		: clean
 		  $(RM) $(NAME)
-		  $(RM) lib$(NAME).dll
+		  $(RM) lib$(NAME).so
+		  $(RM) lib$(NAME).so.1
 		  $(RM) $(NAME_TEST)
 		  $(RM) $(NAME_COMPIL)
 		  $(RM) $(NAME_INT)
