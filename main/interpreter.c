@@ -70,9 +70,10 @@ static char *read_arg(char **av)
       parseer.verbose = atoi(get_arg(av[i + 1]));
     if (strcmp(av[i], "--no-load") == 0)
       parseer.preload = 0;
+    if (strstr(av[i], ".cht") != NULL)
+      file = av[i];
     i++;
   }
-  file = av[1];
   return (file);
 }
 
