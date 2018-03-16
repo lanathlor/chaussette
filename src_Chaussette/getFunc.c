@@ -146,7 +146,7 @@ static t_item *haveFunc(char **words, t_item *item)
 	parseer.words++;
 	testNULL(words);
 	setItemInfo("name", words[parseer.words]);
-	while (parseer.items[inc]){
+	while (parseer.items && parseer.items[inc]){
 		if (my_strcmp(InItem(parseer.items[inc], "name"), words[parseer.words]) == SUCCESS)
 			return (parseer.items[inc]);
 		inc++;

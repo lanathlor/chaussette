@@ -267,7 +267,8 @@ void readLeadFile(char *file)
       incl = my_strcat(incl, "/", FAILURE);
       incl = my_strcat(incl, str, FAILURE);
       parseer.include = reallocTab(parseer.include, incl);
-      parseer.items = getAllItem(incl);
+      if (parseer.preload)
+        parseer.items = getAllItem(incl);
     }
     free(incl);
     incl = NULL;
