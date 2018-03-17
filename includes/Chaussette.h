@@ -1,17 +1,8 @@
 #ifndef CHAUSSETTE_H_
 	#define CHAUSSETTE_H_
 
-#include "usable.h"
-#include "equal.h"
-#include "findVar.h"
-#include "findType.h"
-#include "getVar.h"
-#include "getFunc.h"
-#include "builtIn.h"
-#include "Operat.h"
-#include "condHandle.h"
-#include "getALLvar.h"
-#include "isJustInt.h"
+#include <chaussette_header/usable.h>
+
 // define
 #define SYN_ERR ("is not a syntax")
 #define EMPTY_STR ("nothing after")

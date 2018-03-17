@@ -96,16 +96,13 @@ linked 		: $(OBJS)
 
 install 	: re linked
 		  $(CP) $(NAME) /bin
-		  $(RM) /usr/include/chaussette
-		  $(MKDIR) /usr/include/chaussette
-		  $(CP) Makefile /usr/include/chaussette/.
-		  $(CP) src_Chaussette /usr/include/chaussette/src_Chaussette
-		  $(CP) src_Lipsite /usr/include/chaussette/src_Lipsite
-		  $(CP) includes/*.h /usr/include/chaussette/.
-		  $(CP) lib /usr/include/chaussette/lib
-		  $(CP) main/interpreter.c /usr/include/chaussette/.
+		  $(RM) /usr/include/chaussette_header
+		  $(MKDIR) /usr/include/chaussette_header
+		  $(CP) Makefile /usr/include/chaussette_header/.
+		  $(CP) includes/*.h /usr/include/chaussette_header/.
+		  $(CP) main/interpreter.c /usr/include/chaussette_header/.
 		  $(CP) includes/Chaussette.h /usr/include/.
-		  $(CP) libchaussette.so* /usr/include/chaussette/.
+		  $(CP) libchaussette.so* /usr/include/chaussette_header/.
 		  $(CP) libchaussette.so* /usr/lib/.
 		  $(CP) libchaussette.so* /lib/.
 		  $(CP) $(NAME) /usr/bin
@@ -114,8 +111,8 @@ install 	: re linked
 
 uninstall 	: fclean
 		  $(RM) /bin/$(NAME)
-		  $(RM) /usr/include/chaussette
-		  $(RM) /usr/include/chaussette.h
+		  $(RM) /usr/include/Chaussette.h
+		  $(RM) /usr/include/chaussette_header
 		  $(RM) /usr/bin/$(NAME)
 		  $(RM) /usr/lib/libchaussette.so*
 		  $(RM) /lib/libchaussette.so

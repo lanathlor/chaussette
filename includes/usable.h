@@ -79,7 +79,7 @@ char	*gnlParseer(int fd);
 char  **strtabParseer(const char *str, char delim);
 void perrorPars(char **word, char *errorType);
 int memLen(t_var *var);
-int memCopy(t_var *new, t_var *var);
+int memCopy(t_var *dest, t_var *var);
 t_var *memRealloc(t_var *var);
 int searchVar(t_var *var, char *name);
 void testNULL(char **words);
