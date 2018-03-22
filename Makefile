@@ -124,7 +124,7 @@ update		: fclean
 
 push 		: fclean
 		  $(GIT) add --all
-		  $(GIT) commit -am $(MSG)
+		  $(GIT) commit -am '$(MSG)'
 		  $(GIT) push
 
 clean		:
