@@ -10,7 +10,7 @@
 	! write 'we are in the elseif\n';
 # else;
 	! write 'we are in the else\n';
-?endif;
+? endif;
 = $i ! facto ( 5 );
 ! write $i '\n';
 = $nb #str;

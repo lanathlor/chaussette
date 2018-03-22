@@ -118,12 +118,13 @@ uninstall 	: fclean
 		  $(RM) /lib/libchaussette.so
 		  $(RM) /usr/sbin/$(NAME)
 
-update		:
+update		: fclean
 		  $(GIT) pull
+		  make install
 
-push 		:
+push 		: fclean
 		  $(GIT) add --all
-		  $(GIT) commit -am "new"
+		  $(GIT) commit -am $(MSG)
 		  $(GIT) push
 
 clean		:
