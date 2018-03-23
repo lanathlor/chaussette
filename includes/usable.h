@@ -28,7 +28,7 @@ typedef struct s_parseer
   int cond;
   int string;
   int verbose;
-  int preload;  
+  int preload;
 }			t_parseer;
 
 typedef enum s_type

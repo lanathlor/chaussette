@@ -4,16 +4,16 @@
 <name="facto", arguments="nb", function="
 ? if >= $nb 12;
 	! return 0;
-?endif;
+? endif;
 ? if == $nb 1;
 	! return 1;
-?endif;
+? endif;
 ! return * $nb ! facto ( - $nb 1 );
 ">
 <name="putstr", arguments="str nb", function="
 ? if == $str[$nb] 0;
 	! return 0;
-?endif;
+? endif;
 ! ascii $str[$nb];
 ! putstr ( $str + $nb 1 );
 ! return 1;
@@ -21,3 +21,14 @@
 <name="my_putstr", arguments="str", function="
 ! putstr ( $str 0 );
 ">
+<name="create_struct", arguments="", function="
+! write 'creating struct\n';
+= $struct 0;
+! string $struct;
+= $struct.test 1;
+= $struct.ok 1;
+= $struct.flag 1;
+= $struct[1] 10;
+! return $struct
+"
+>

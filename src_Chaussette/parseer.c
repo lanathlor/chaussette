@@ -106,12 +106,13 @@ void initSyntax(void)
 	ptr[11].op = &ou;
 }
 
-int chaussette(char *code)
+int chaussette(char *code, char *name)
 {
 	char **splitCode;
 	int ret;
 
 	
+	parseer.in_func = my_strdup(name);
 	if (code == NULL)
 	{
 		parseer.check = FAILURE;
@@ -143,5 +144,6 @@ int chaussette(char *code)
 	freeVar(mem.var_local);
 	mem.var_local = NULL;
 	parseer.check = SUCCESS;
+	free(parseer.in_func);
 	return (ret);
 }

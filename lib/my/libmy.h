@@ -64,6 +64,8 @@ char	*my_hashstr(char *str, int i, int j, int free_ck);
 ** my_strcat.c
 */
 char	*my_strcat(char *dest, char *src, int free_ck);
+char 	*my_strdup(char *src);
+
 
 /*
 ** tab_malloc.c

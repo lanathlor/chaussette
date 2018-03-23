@@ -3,7 +3,7 @@
 #include "libmy.h"
 #include "Chaussette.h"
 
-static t_var *lookVarForAdrFromName(char *name, char location)
+t_var *lookVarForAdrFromName(char *name, char location)
 {
   t_var *adr;
   int comp;
@@ -130,6 +130,7 @@ static int *switchString(char *var)
     i++;
   }
   free(name);
+  mem.var_stack[0].name = NULL;
   return (mem.var_stack[0].value);
 }
 

@@ -10,7 +10,7 @@ static int isElseIf(char **split)
 	str = my_hashstr(split[parseer.line], 2, 8, FAILURE);
 	if (my_strcmp(str, "elseif") == SUCCESS)
 	{
-		parseer.words = 1;
+		parseer.words = 2;
 		words = strtabParseer(split[parseer.line], ' ');
  		if (getVal(words))
  		{
@@ -27,22 +27,15 @@ static int isElseIf(char **split)
 static int goInIf(char **split)
 {
 	int ret;
-	int nest;
 
 	ret = 0;
-	nest = 0;
 	parseer.line++;
-	while (split[parseer.line] && (my_strcmp(split[parseer.line], "?endif") != SUCCESS || nest != 0) && split[parseer.line][0] != '#')
+	while (split[parseer.line] && my_strcmp(split[parseer.line], "? endif") != SUCCESS && split[parseer.line][0] != '#')
 	{
-		if (my_strcmp(split[parseer.line], "?endif") == SUCCESS){
-			nest--;
-		} else if (split[parseer.line][0] == '?') {
-			nest++;
-		}
 		ret = parsing(split);
 		parseer.line++;
 	}
-	while (split[parseer.line] && my_strcmp(split[parseer.line], "?endif") != SUCCESS)
+	while (split[parseer.line] && my_strcmp(split[parseer.line], "? endif") != SUCCESS)
 		parseer.line++;
 	parseer.check = SUCCESS;
 	return (ret);
@@ -50,9 +43,18 @@ static int goInIf(char **split)
 
 static int findOtherStatment(char **split)
 {
+	size_t nest;
+
+	nest = 0;
 	parseer.line++;
-	while (split[parseer.line] && my_strcmp(split[parseer.line], "?endif") != SUCCESS)
+	while (split[parseer.line] && (my_strcmp(split[parseer.line], "? endif") != SUCCESS || nest))
 	{
+		if (my_strcmp(split[parseer.line], "? endif") == SUCCESS){
+			if (nest != 0)
+				nest--;
+		} else if (split[parseer.line][0] == '?') {
+			nest++;
+		}
 		if (my_strcmp(split[parseer.line], "# else") == SUCCESS)
 			return (goInIf(split));
 		else if (isElseIf(split) == SUCCESS)

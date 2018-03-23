@@ -108,6 +108,7 @@ install 	: re linked
 		  $(CP) $(NAME) /usr/bin
 		  $(CP) $(NAME) /usr/sbin
 		  ldconfig
+		  make fclean
 
 uninstall 	: fclean
 		  $(RM) /bin/$(NAME)

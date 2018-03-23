@@ -34,7 +34,7 @@ int *getInt(char *name);
 void readLeadFile(char *file);
 
 /* execute the code given as parameters. Can return NULL on unfind int */
-int chaussette(char *code);
+int chaussette(char *code, char *name);
 
 void showMem(t_var *var);
 void showAllMem(void);

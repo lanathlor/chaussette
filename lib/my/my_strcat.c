@@ -35,3 +35,24 @@ char	*my_strcat(char *dest, char *src, int free_ck)
     free(src);
   return (dest);
 }
+
+char *my_strdup(char *src)
+{
+  char *ret;
+  int   i;
+
+  i = 0;
+  if (src == NULL)
+    return (NULL);
+  ret = malloc(sizeof(char) * 1);
+  ret[0] = 0;
+  if (ret == NULL)
+    my_perror(M_FAIL);
+  while (src[i]){
+    ret = my_realloc(ret, src[i]);
+    if (ret == NULL)
+      my_perror(M_FAIL);
+    i++;
+  }
+  return (ret);
+}

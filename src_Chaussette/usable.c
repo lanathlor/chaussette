@@ -123,7 +123,9 @@ void perrorPars(char **word, char *errorType)
 {
   my_puterror("(Chaussette) ERROR on line ");
   my_putnbrfd(parseer.line + 1, 2);
-  my_puterror(" : ");
+  my_puterror(" in '");
+  my_puterror(parseer.in_func);
+  my_puterror("' : ");
   if (word)
   {
     my_puterror("'");

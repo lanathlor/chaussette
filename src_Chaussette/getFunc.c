@@ -182,6 +182,8 @@ static void setBuiltIn(t_ptr *built_in)
 	built_in[4].ptr = &returning;
 	built_in[5].str = "read";
 	built_in[5].ptr = &readFrom;
+	built_in[6].str = "string";
+	built_in[6].ptr = &setString;
 }
 
 static int execBuiltIn(char **split, char **words, t_ptr *built_in)
@@ -209,6 +211,8 @@ int getFunc(char **split, char **words)
 	int keep_word;
 	int keep_cond;
 	int ret;
+	char *keep_func;
+	char *func_name;
 
 	item = NULL;
 	testNULL(words);
@@ -219,10 +223,12 @@ int getFunc(char **split, char **words)
 		if ((var = malloc(sizeof(t_var) * (memLen(mem.var_local) + 2))) == NULL)
 			perrorPars(words, M_FAIL);
 		item = haveFunc(words, item);
+		func_name = my_strdup(words[parseer.words]);
 		new = compArg(words);
 		if (memCopy(var, mem.var_local) == FAILURE)
 			perrorPars(words, "Copy failed");
 		var[memLen(mem.var_local)].name = NULL;
+		keep_func = my_strdup(parseer.in_func);
 		keep_line = parseer.line;
 		keep_word = parseer.words;
 		keep_cond = parseer.cond;
@@ -239,7 +245,7 @@ int getFunc(char **split, char **words)
 		{
 			showMem(mem.var_local);
 		}
-		ret = chaussette(InItem(item, "function"));
+		ret = chaussette(InItem(item, "function"), func_name);
 		if ((mem.var_local = malloc(sizeof(t_var) * (memLen(var) + 2))) == NULL)
 			perrorPars(words, M_FAIL);
 		if (memCopy(mem.var_local, var) == FAILURE)
@@ -262,6 +268,9 @@ int getFunc(char **split, char **words)
 			showMem(mem.var_local);
 		}
 		freeItem(item);
+		parseer.in_func = my_strdup(keep_func);
+		free(keep_func);
+		free(func_name);
 	}
 	parseer.check = SUCCESS;
 	return (ret);

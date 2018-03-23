@@ -93,7 +93,7 @@ int		main (int ac, char **av)
   readLeadFile(file);
   item = createItem();
   item = haveFunc(item);
-  chaussette(InItem(item, "function"));
+  chaussette(InItem(item, "function"), "main");
   freeMem();
   freeInfo();
   freeItem(item);

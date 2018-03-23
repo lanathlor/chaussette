@@ -20,6 +20,7 @@ typedef struct s_func
 typedef struct s_parseer
 {
   char **include;
+  char *in_func;
   p_item *items;
   t_func *function;
   int line;

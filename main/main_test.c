@@ -49,7 +49,7 @@ int		main (int ac, char **av)
   //promptItem(item);
   //talkative(item, codex);
   code = InItem(item, "function");
-  printf("ret = %d\n", chaussette(code));
+  printf("ret = %d\n", chaussette(code, "main"));
   printf("str = %s\n", str);
   freeMem();
   //freeCodex(codex);

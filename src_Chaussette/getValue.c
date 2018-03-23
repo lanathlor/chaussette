@@ -22,6 +22,8 @@ static char *getRank(char *name, char *words, int *i)
 	name = my_realloc(name, '[');
 	while (words[j] != ']')
 	{
+    if (!words[j])
+      perrorPars(NULL, "you need to close the braket");
 		tmp[0] = my_realloc(tmp[0], words[j]);
 		j++;
 	}
@@ -57,8 +59,6 @@ char *getOnlyName(char *words)
 			inc = my_strlen(name);
 			name = my_realloc(name, 0);
 			while (words[i] != ']'){
-			  	if (!words[i])
-			  		perrorPars(NULL, "you need to close the braket");
 				i++;
 			}
 		}
