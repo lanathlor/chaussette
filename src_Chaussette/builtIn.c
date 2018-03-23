@@ -202,7 +202,6 @@ int readFrom(char **split, char **words)
 	return (letter);
 }
 
-#include <stdio.h>
 int setString(char **split, char **words)
 {
 	t_var *adr;
@@ -213,11 +212,17 @@ int setString(char **split, char **words)
 	testNULL(words);
 	parseer.words++;
 	name = my_hashstr(words[parseer.words], 1, my_strlen(words[parseer.words]), FAILURE);
-	printf("words = %s\n", name);
 	adr = lookVarForAdrFromName(name, words[parseer.words][0]);
 	parseer.check = SUCCESS;
 	if (adr[0].name == NULL)
 		return (0);
 	adr->type = _string;
 	return (*(int *)(adr->value));
+}
+
+int dumpChaussette(char **split, char **words)
+{
+	split++;
+	words++;
+	return (1);
 }

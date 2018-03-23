@@ -8,14 +8,14 @@
 ? if == $nb 1;
 	! return 1;
 ? endif;
-! return * $nb ! facto ( - $nb 1 );
+! return * $nb ! facto(- $nb 1);
 ">
 <name="putstr", arguments="str nb", function="
 ? if == $str[$nb] 0;
 	! return 0;
 ? endif;
 ! ascii $str[$nb];
-! putstr ( $str + $nb 1 );
+! putstr($str, + $nb 1);
 ! return 1;
 ">
 <name="my_putstr", arguments="str", function="
@@ -30,5 +30,4 @@
 = $struct.flag 1;
 = $struct[1] 10;
 ! return $struct
-"
->
+">

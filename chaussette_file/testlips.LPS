@@ -11,14 +11,14 @@
 # else;
 	! write 'we are in the else\n';
 ? endif;
-= $i ! facto ( 5 );
+= $i ! facto(5);
 ! write $i '\n';
 = $nb #str;
 = $nb[0] 104;
 = $lol 1;
-= $struct ! create_struct ( );
+= $struct ! create_struct();
 ! write 'struct : ' $struct.flag '\n';
-! my_putstr ( $nb );
+! my_putstr($nb);
 ! write '\n';
 ! return 101;
 ", nb="2">

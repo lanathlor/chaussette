@@ -59,6 +59,8 @@ static t_var *dumpLLocal(t_var *var, char *var_name)
 	inc = 0;
 	if ((name = strtabParseer(var_name, ' ')) == NULL)
 		perrorPars(NULL, "Stop on delimitation");
+	if (name == NULL || var == NULL || my_strcmp(name[0], "void") == SUCCESS || my_strcmp(name[0], "") == SUCCESS)
+		return (var);
 	while (name[inc])
 	{
 		i = change_name(var, name[inc], i);
@@ -71,6 +73,69 @@ static t_var *dumpLLocal(t_var *var, char *var_name)
 		inc++;
 	}
 	return (var);
+}
+
+static char **addLine(char **tmp)
+{
+	char 	**ret;
+	int 	i;
+
+	ret = malloc((my_tablen((const char **)tmp) + 3) * sizeof(char *));
+	if (ret == NULL)
+		my_perror(M_FAIL);
+	i = 0;
+	while (tmp[i]){
+		ret[i] = my_strdup(tmp[i]);
+		free(tmp[i]);
+		i++;
+		ret[i] = NULL;
+	}
+	ret[i] = NULL;
+	ret[i + 1] = NULL;
+	free(tmp);
+	return (ret);
+}
+
+static char **cutParam(char **words)
+{
+	int i;
+	int j;
+	int k;
+	char **tmp;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	tmp = malloc(sizeof(char *) * 2);
+	if (tmp == NULL)
+		my_perror(M_FAIL);
+	tmp[0] = NULL;
+	tmp[1] = NULL;
+	while (words[i]){
+		while (words[i][j]){
+			if (words[i][j] == '(' || words[i][j] == ')'){
+				if (tmp[k]){
+					tmp = addLine(tmp);
+					k++;
+				}
+				tmp[k] = my_realloc(tmp[k + 1], words[i][j]);
+				tmp = addLine(tmp);
+				k++;
+				tmp[k] = NULL;
+			} else {
+				tmp[k] = my_realloc(tmp[k], words[i][j]);
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+		if (tmp[k]){
+			k++;
+			tmp = addLine(tmp);
+			tmp[k] = NULL;
+		}
+	}
+	return (tmp);
 }
 
 static t_var *compArg(char **words)
@@ -215,6 +280,7 @@ int getFunc(char **split, char **words)
 	char *func_name;
 
 	item = NULL;
+	words = cutParam(words);
 	testNULL(words);
 	setBuiltIn(built_in);
 	ret = execBuiltIn(split, words, built_in);

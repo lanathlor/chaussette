@@ -36,8 +36,8 @@ char	*gnlParseer(int fd)
   str = NULL;
   while (read(fd, &buff, ONE) > ZERO && buff != ';')
     {
-      if (buff != '\n')
-	str = my_reallocParseer(str, buff);
+    if (buff != '\n')
+	   str = my_reallocParseer(str, buff);
     }
   if (my_strlen(str) > ZERO)
     str = my_reallocParseer(str, ';');
@@ -50,9 +50,9 @@ static int  is_alpha(char c, char delim)
 {
   if (c == ZERO)
     return (SUCCESS);
-  if (c != delim)
-    return (SUCCESS);
-  return (FAILURE);
+  if (c == delim)
+    return (FAILURE);
+  return (SUCCESS);
 }
 
 static char **my_strtowordtab(const char *str, char **word, char delim)
@@ -64,12 +64,15 @@ static char **my_strtowordtab(const char *str, char **word, char delim)
   s = ZERO;
   while (str[s])
     {
-      if (is_alpha(str[s], delim) == SUCCESS)
+      if (is_alpha(str[s], delim) == SUCCESS){
+        if (str[s] == ',')
+          s++;
+        else
          word[i] = my_realloc(word[i], str[s++]);
+      }
       else
       {
-        while (is_alpha(str[s++], delim) == FAILURE)
-         ;
+        while (is_alpha(str[s++], delim) == FAILURE);
        s--;
        if (my_strlen(word[i]) >= 1)
             i++;
