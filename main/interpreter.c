@@ -15,6 +15,7 @@ static void usage(void)
   printf("OPTION\n");
   printf("\t-v [x], --vebose [x]\tset the verbosity level of the interpreter\n");
   printf("\t--no-load\t\tdisable the preload of functions, save ram, lose time\n");
+  printf("\t-h, --help\tshow this message\n");
 }
 
 static t_item *haveFunc(t_item *item)
@@ -65,6 +66,7 @@ static char *read_arg(char **av)
   int i;
 
   i = 0;
+  file = NULL;
   while (av[i]){
     if (strcmp(av[i], "-v") == 0 || strcmp(av[i], "--verbose") == 0)
       parseer.verbose = atoi(get_arg(av[i + 1]));
@@ -72,6 +74,10 @@ static char *read_arg(char **av)
       parseer.preload = 0;
     if (strstr(av[i], ".cht") != NULL)
       file = av[i];
+    if (strcmp(av[i], "-h") == 0 || strcmp(av[i], "--help") == 0){
+      usage();
+      exit(-1);
+    }
     i++;
   }
   return (file);
