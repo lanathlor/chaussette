@@ -107,7 +107,7 @@ t_var *getVarFromPart(char **words)
 	{
 		var[0].name = my_strcpy(var[0].name, "simple_int", FAILURE);
 		if ((var[0].value = malloc(sizeof(int))) == NULL)
-       		my_perror(M_FAIL);
+	       		my_perror(M_FAIL);
 		*(int *)var[0].value = my_getnbr(name, FAILURE);
 		var[0].type = _int;
 		var[1].name = NULL;

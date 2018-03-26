@@ -11,6 +11,10 @@
 # else;
 	! write 'we are in the else\n';
 ? endif;
+= $test_str ! dump test;
+! write $test_str '\n';
+! my_putstr($test_str);
+! write '\n';
 = $i ! facto(5);
 ! write $i '\n';
 = $nb #str;

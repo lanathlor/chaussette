@@ -164,7 +164,6 @@ int equal(char **split, char **words)
   equalize(adr_op1, val_op2, type);
   if (mem.var_stack[0].name)
     adr_op1 = switchString(words[parseer.words]);
-  //*(char *)adr_op1 = val_op2;
   parseer.words = tmp2;
   if (words[parseer.words + 1] && !words[parseer.words + 2]
       && words[parseer.words + 1][0] == ')')

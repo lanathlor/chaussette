@@ -222,7 +222,31 @@ int setString(char **split, char **words)
 
 int dumpChaussette(char **split, char **words)
 {
+	t_var new;
+	char *str;
+	int i;
+
 	split++;
 	words++;
-	return (1);
+	testNULL(words);
+	parseer.words++;
+	i = 0;
+	str = words[parseer.words];
+	parseer.words++;
+	mem.var_stack = malloc(sizeof(t_var));
+	mem.var_stack[0].name = NULL;
+	mem.var_stack[0].value = NULL;
+	while (str[i]){
+		new.name = my_strdup("[");
+		new.name = my_strcat(new.name, my_getstr(i), FAILURE);
+		new.name = my_strcat(new.name, "]", FAILURE);
+		new.value = malloc(sizeof(int));
+		if (new.value == NULL)
+			my_perror(M_FAIL);
+		*(int *)new.value = str[i];
+		mem.var_stack = memAdd(mem.var_stack, new);
+		i++;
+	}
+	parseer.check = SUCCESS;
+	return (i);
 }

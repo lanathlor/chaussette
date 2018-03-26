@@ -249,6 +249,8 @@ static void setBuiltIn(t_ptr *built_in)
 	built_in[5].ptr = &readFrom;
 	built_in[6].str = "string";
 	built_in[6].ptr = &setString;
+	built_in[7].str = "dump";
+	built_in[7].ptr = &dumpChaussette;
 }
 
 static int execBuiltIn(char **split, char **words, t_ptr *built_in)
