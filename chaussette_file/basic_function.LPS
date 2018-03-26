@@ -19,7 +19,7 @@
 ! return 1;
 ">
 <name="my_putstr", arguments="str", function="
-! putstr ( $str 0 );
+! putstr($str, 0);
 ">
 <name="create_struct", arguments="", function="
 ! write 'creating struct\n';
