@@ -2,6 +2,6 @@
 	#define ISJUSTINT_H_
 
 	int isJustInt(char *str);
-	
+	int isJustChar(char *str);
 
 #endif

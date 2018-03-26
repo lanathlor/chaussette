@@ -142,6 +142,9 @@ static int lookVar(char **words)
   if (isJustInt(words[parseer.words])){
       parseer.check = SUCCESS;
       return (my_getnbr(words[parseer.words], FAILURE));
+  } else if (isJustChar(words[parseer.words]) == SUCCESS){
+      parseer.check = SUCCESS;
+      return (words[parseer.words][1]);
   }
   hash = getOnlyName(words[parseer.words]);
   while (comp < NB_VAR)

@@ -11,5 +11,14 @@ int isJustInt(char *str)
 		}
 		i++;
 	}
-	return (1);	
+	return (1);
+}
+
+int isJustChar(char *str)
+{
+	if (my_strlen(str) != 3)
+		return (FAILURE);
+	if (str[0] == '\'' && str[2] == '\'')
+		return (SUCCESS);
+	return (FAILURE);
 }
