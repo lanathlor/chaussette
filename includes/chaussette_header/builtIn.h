@@ -3,6 +3,8 @@
 
 # define NB_BUILT (8)
 
+//setter
+void setBuiltIn(t_ptr *built_in);
 //function
 int asciiChaussetteAt(char **split, char **words);
 int writeChaussetteAt(char **split, char **words);

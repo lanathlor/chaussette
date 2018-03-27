@@ -30,18 +30,36 @@ static t_var *memFill(t_var *var, t_var *new)
 	return (var);
 }
 
+static char *getAppend(char *str)
+{
+	char *ret;
+	int i;
+
+	i = 0;
+	ret = malloc(sizeof(char));
+	if (ret == NULL)
+		my_perror(M_FAIL);
+	ret[0] = 0;
+	while (str[i] && str[i] != '[' && str[i] != '.'){
+		i++;
+	}
+	while (str[i]){
+		ret = my_realloc(ret, str[i]);
+		i++;
+	}
+	return (ret);
+}
+
 int change_name(t_var *var, char *name, int i)
 {
 	char *append;
-	int len;
 
-	len = my_strlen(var[i].name);
 	free(var[i].name);
 	var[i].name = my_strcpy(var[i].name, name, FAILURE);
 	i++;
 	while (var[i].name && my_strcmp(var[i].name, "__split") == FAILURE)
 	{
-		append = my_hashstr(var[i].name, len, my_strlen(var[i].name), FAILURE);
+		append = getAppend(var[i].name);
 		var[i].name = my_strcpy(var[i].name, name, FAILURE);
 		var[i].name = my_strcat(var[i].name, append, FAILURE);
 		i++;
@@ -57,12 +75,15 @@ static t_var *dumpLLocal(t_var *var, char *var_name)
 
 	i = 0;
 	inc = 0;
+ 	if (my_strcmp(var_name, "void") == SUCCESS || my_strcmp(var_name, " ") == SUCCESS || my_strcmp(var_name, "") == SUCCESS)
+ 		return (var);
 	if ((name = strtabParseer(var_name, ' ')) == NULL)
 		perrorPars(NULL, "Stop on delimitation");
-	if (name == NULL || var == NULL || my_strcmp(name[0], "void") == SUCCESS || my_strcmp(name[0], "") == SUCCESS)
+	if (name == NULL || var == NULL)
 		return (var);
-	while (name[inc])
-	{
+	if( my_strcmp(name[0], "void") == SUCCESS || my_strcmp(name[0], "") == SUCCESS)
+		return (var);
+	while (name[inc]){
 		i = change_name(var, name[inc], i);
 		// else
 		// {
@@ -167,7 +188,7 @@ static t_var *compArg(char **words)
 					var = memRealloc(var);
 					var[len].name = my_strcpy(var[len].name, "simple_int", FAILURE);
 					if ((var[len].value = malloc(sizeof(int))) == NULL)
-       					my_perror(M_FAIL);
+       						my_perror(M_FAIL);
 					*(int *)var[len].value =  tmp;
 					var[len].type = _int;
 					var[len + 1].name = NULL;
@@ -175,15 +196,19 @@ static t_var *compArg(char **words)
 			else
 			{
 				tmp = getVal(words);
-				if (parseer.string)
+				if (parseer.string){
 					var = memFill(var, getVarFromPart(words));
-				len = memLen(var);
-				var = memRealloc(var);
-				var[len].name = my_strcpy(var[len].name, "simple_int", FAILURE);
-				if ((var[len].value = malloc(sizeof(int))) == NULL)
-					my_perror(M_FAIL);
-				*(int *)var[len].value =  tmp;
-				var[len].type = _int;
+					len = memLen(var);
+					var = memRealloc(var);
+				} else {
+					len = memLen(var);
+					var = memRealloc(var);
+					var[len].name = my_strcpy(var[len].name, "simple_int", FAILURE);
+					if ((var[len].value = malloc(sizeof(int))) == NULL)
+						my_perror(M_FAIL);
+					*(int *)var[len].value =  tmp;
+					var[len].type = _int;
+				}
 				var[len + 1].name = NULL;
 			}
 			len = memLen(var);
@@ -231,26 +256,6 @@ static t_item *haveFunc(char **words, t_item *item)
 	freeInfo();
 	perrorPars(words, "is not referenced as an existant function");
 	return (NULL);
-}
-
-static void setBuiltIn(t_ptr *built_in)
-{
-	built_in[0].str = "write";
-	built_in[0].ptr = &writeChaussette;
-	built_in[1].str = "ascii";
-	built_in[1].ptr = &asciiChaussette;
-	built_in[2].str = "writeAt";
-	built_in[2].ptr = &writeChaussetteAt;
-	built_in[3].str = "asciiAt";
-	built_in[3].ptr = &asciiChaussetteAt;
-	built_in[4].str = "return";
-	built_in[4].ptr = &returning;
-	built_in[5].str = "read";
-	built_in[5].ptr = &readFrom;
-	built_in[6].str = "string";
-	built_in[6].ptr = &setString;
-	built_in[7].str = "dump";
-	built_in[7].ptr = &dumpChaussette;
 }
 
 static int execBuiltIn(char **split, char **words, t_ptr *built_in)

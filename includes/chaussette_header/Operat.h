@@ -13,5 +13,6 @@ int maxuequ(int var_left, int var_right);
 int equ(int var_left, int var_right);
 int et(int var_left, int var_right);
 int ou(int var_left, int var_right);
+int nequ(int var_left, int var_right);
 
 #endif

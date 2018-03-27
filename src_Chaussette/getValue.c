@@ -171,6 +171,7 @@ int getVal(char **words)
   parseer.words++;
   value = 0;
   parseer.string = 0;
+  mem.var_stack[0].name = NULL;
   testNULL(words);
   if (!my_strcmp(words[parseer.words], "(")
       || !my_strcmp(words[parseer.words], ")"))

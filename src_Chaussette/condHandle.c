@@ -6,13 +6,14 @@ static int isElseIf(char **split)
 {
 	char *str;
 	char **words;
+	int i = 0;
 
 	str = my_hashstr(split[parseer.line], 2, 8, FAILURE);
 	if (my_strcmp(str, "elseif") == SUCCESS)
 	{
-		parseer.words = 2;
+		parseer.words = 1;
 		words = strtabParseer(split[parseer.line], ' ');
- 		if (getVal(words))
+ 		if ((i = getVal(words)))
  		{
  			free_tab(words);
 			free(str); 			

@@ -104,6 +104,8 @@ void initSyntax(void)
 	ptr[10].op = &et;
 	ptr[11].str = "||";
 	ptr[11].op = &ou;
+	ptr[12].str = "!=";
+	ptr[12].op = &nequ;
 }
 
 int chaussette(char *code, char *name)

@@ -4,6 +4,26 @@
 #include "lipsite.h"
 #include "Chaussette.h"
 
+void setBuiltIn(t_ptr *built_in)
+{
+	built_in[0].str = "write";
+	built_in[0].ptr = &writeChaussette;
+	built_in[1].str = "ascii";
+	built_in[1].ptr = &asciiChaussette;
+	built_in[2].str = "writeAt";
+	built_in[2].ptr = &writeChaussetteAt;
+	built_in[3].str = "asciiAt";
+	built_in[3].ptr = &asciiChaussetteAt;
+	built_in[4].str = "return";
+	built_in[4].ptr = &returning;
+	built_in[5].str = "read";
+	built_in[5].ptr = &readFrom;
+	built_in[6].str = "string";
+	built_in[6].ptr = &setString;
+	built_in[7].str = "dump";
+	built_in[7].ptr = &dumpChaussette;
+}
+
 static int promptStringFd(char **words, int fd)
 {
 	int inc;
@@ -241,6 +261,7 @@ int dumpChaussette(char **split, char **words)
 		new.name = my_strcat(new.name, my_getstr(i), FAILURE);
 		new.name = my_strcat(new.name, "]", FAILURE);
 		new.value = malloc(sizeof(int));
+		new.type = _int;
 		if (new.value == NULL)
 			my_perror(M_FAIL);
 		*(int *)new.value = str[i];
