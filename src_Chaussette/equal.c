@@ -93,6 +93,18 @@ t_type getType(char **words)
   return(_int);
 }
 
+static void clean_all(char *name)
+{
+  t_var *all;
+  int i;
+
+  all = getVarFromPartName(name);
+  while (all[i].name){
+    *(int *)all[i].value = 0;
+    i++;
+  }
+}
+
 static int *switchString(char *var)
 {
   char *name;
@@ -106,6 +118,8 @@ static int *switchString(char *var)
   inc = 0;
   name = my_hashstr(var, 1, my_strlen(var), FAILURE);
   adr = lookVarForAdrFromName(name, var[0]);
+  if (adr->type == _string)
+    clean_all(var);
   adr->type = _string;
   while (mem.var_stack[i].name)
   {

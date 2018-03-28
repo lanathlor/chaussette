@@ -6,5 +6,6 @@ t_var *Vlocal(char *var);
 t_var *VfromC(char *var);
 t_var *getVar(char **words);
 t_var *getVarFromPart(char **words);
+t_var *getVarFromPartName(char *name);
 
 #endif
