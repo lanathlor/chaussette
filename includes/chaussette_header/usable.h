@@ -6,7 +6,7 @@
 # define NB_VAR (4)
 # define NB_BOOL (3)
 # define NB_INTER (3)
-# define NB_OP (12)
+# define NB_OP (13)
 # define NB_TYPE (3)
 
 // stuctures

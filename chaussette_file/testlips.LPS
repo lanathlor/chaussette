@@ -1,6 +1,6 @@
 <name="main", function="
 = #str[0] 97;
-? if == #str[0] 97;
+? if == #str[0] 'a';
 	! write 'we are in the if\n';
 	? if == 1 1;
 		! write 'we are in a neasted if\n';
@@ -11,11 +11,14 @@
 # else;
 	! write 'we are in the else\n';
 ? endif;
+= $test_str ! dump test;
+! write $test_str '\n';
+! my_putstr($test_str);
+! write '\n';
 = $i ! facto(5);
 ! write $i '\n';
 = $nb #str;
 = $nb[0] 104;
-= $lol 1;
 = $struct ! create_struct();
 ! write 'struct : ' $struct.flag '\n';
 ! my_putstr($nb);

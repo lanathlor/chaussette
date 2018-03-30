@@ -67,3 +67,8 @@ int invert(int var)
 {
 	return (!var);
 }
+
+int nequ(int var_left, int var_right)
+{
+	return (var_left != var_right);
+}

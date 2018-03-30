@@ -250,9 +250,8 @@ void readLeadFile(char *file)
     my_perror(M_FAIL);
   parseer.include[0] = NULL;
   path = my_hashstr(file, 0, my_find_last(file, '/'), FAILURE);
-  /*if ((parseer.items = malloc(sizeof (p_item *))) == NULL)
-    my_perror(M_FAIL);
-  parseer.items[0] = NULL;*/
+  if (path && my_strlen(path) > 0)
+    path = my_strcat(path, "/", FAILURE);
   str = gnl(fd);
   while (my_strcmp(str, "FILE FUNCTION START") == FAILURE && str != NULL)
   {
@@ -264,7 +263,6 @@ void readLeadFile(char *file)
   {
     if (str[0] != '/'){
       incl = my_strcpy(incl, path, FAILURE);
-      incl = my_strcat(incl, "/", FAILURE);
       incl = my_strcat(incl, str, FAILURE);
       parseer.include = reallocTab(parseer.include, incl);
       if (parseer.preload)

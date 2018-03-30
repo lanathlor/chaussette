@@ -107,7 +107,7 @@ t_var *getVarFromPart(char **words)
 	{
 		var[0].name = my_strcpy(var[0].name, "simple_int", FAILURE);
 		if ((var[0].value = malloc(sizeof(int))) == NULL)
-       		my_perror(M_FAIL);
+	       		my_perror(M_FAIL);
 		*(int *)var[0].value = my_getnbr(name, FAILURE);
 		var[0].type = _int;
 		var[1].name = NULL;
@@ -117,6 +117,40 @@ t_var *getVarFromPart(char **words)
 		var = getAll(var, words[parseer.words][0], name);
 		var = getAll(var, words[parseer.words][0], name_array);
 		var = getAll(var, words[parseer.words][0], name_struct);
+	}
+	free(name);
+	free(name_array);
+	free(name_struct);
+	return (var);	
+}
+
+t_var *getVarFromPartName(char *var_name)
+{
+	char *name;
+	char *name_array;
+	char *name_struct;
+	t_var *var;
+
+	if ((var = malloc(sizeof(t_var) * 2)) == NULL)
+		perrorPars(NULL, M_FAIL);
+	var[0].name = NULL;
+	name = my_hashstr(var_name, 1, my_strlen(var_name), FAILURE);
+	name_array = my_strcpy(name, "[", FAILURE);
+	name_struct = my_strcpy(name, ".", FAILURE);
+	if (var_name[0] == '.')
+	{
+		var[0].name = my_strcpy(var[0].name, "simple_int", FAILURE);
+		if ((var[0].value = malloc(sizeof(int))) == NULL)
+	       		my_perror(M_FAIL);
+		*(int *)var[0].value = my_getnbr(name, FAILURE);
+		var[0].type = _int;
+		var[1].name = NULL;
+	}
+	else
+	{
+		var = getAll(var, var_name[0], name);
+		var = getAll(var, var_name[0], name_array);
+		var = getAll(var, var_name[0], name_struct);
 	}
 	free(name);
 	free(name_array);
