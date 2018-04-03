@@ -10,17 +10,18 @@
 ? endif;
 ! return * $nb ! facto(- $nb 1);
 ">
+
 <name="putstr", arguments="str nb", function="
 ? if == $str[$nb] 0;
-	! return 0;
+	! return $nb;
 ? endif;
 ! ascii $str[$nb];
-! putstr($str, + $nb 1);
-! return 1;
+! return ! putstr($str, + $nb 1);
 ">
 <name="my_putstr", arguments="str", function="
 ! putstr($str, 0);
 ">
+
 <name="create_struct", arguments="", function="
 ! write 'creating struct\n';
 = $struct 0;

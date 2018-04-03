@@ -525,6 +525,10 @@ p_item *reallocItem(p_item *item, p_item add)
   i = 0;
   if ((newItem = malloc(sizeof(p_item) * (getLenOfItem(item) + 2))) == NULL)
     my_perror(M_FAIL);
+  if (!item){
+    newItem[0] = NULL;
+    return (newItem);
+  }
   while (item && item[i]){
     newItem[i] = copyItem(item[i]);
     i++;
