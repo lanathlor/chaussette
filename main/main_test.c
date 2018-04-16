@@ -11,7 +11,7 @@ void  dump(void * mem)
 {
   char *str = mem;
   int i;
-  
+
   i = 0;
   while (str[i]){
     my_putnbr(str[i]);

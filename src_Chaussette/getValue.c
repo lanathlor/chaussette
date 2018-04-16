@@ -20,10 +20,9 @@ static char *getRank(char *name, char *words, int *i)
 	tmp[0][0] = 0;
 	str = NULL;
 	name = my_realloc(name, '[');
-	while (words[j] != ']')
-	{
-    if (!words[j])
-      perrorPars(NULL, "you need to close the braket");
+	while (words[j] != ']') {
+		if (!words[j])
+			perrorPars(NULL, "you need to close the braket");
 		tmp[0] = my_realloc(tmp[0], words[j]);
 		j++;
 	}
@@ -94,112 +93,111 @@ static int compArg(char *op, t_ptr *ptr)
 
 static int execOp(char **words)
 {
-  char *op;
-  int res;
-  int comp;
-  int i;
-  int j;
+	char *op;
+	int res;
+	int comp;
+	int i;
+	int j;
 
-  parseer.check = FAILURE;
-  res = 0;
-  op = NULL;
-  op = my_strcpy(op, words[parseer.words], FAILURE);
-  i = 0;
-  j = 0;
-  if (!my_strcmp(op, "!"))
-    {
-      free(op);
-      parseer.check = SUCCESS;
-      return (getFunc(NULL, words));
-    }
-  if (!my_strcmp(op, "!!"))
-    {
-      i = getVal(words);
-      free(op);
-      parseer.check = SUCCESS;
-      return (i);
-    }
-  comp = compArg(op, ptr);
-  if (comp != FAILURE)
-    {
-      i = getVal(words);
-      j = getVal(words);
-      res = ptr[comp].op(i, j);
-      parseer.check = SUCCESS;
-    }
-  free(op);
-  return (res);
+	parseer.check = FAILURE;
+	res = 0;
+	op = NULL;
+	op = my_strcpy(op, words[parseer.words], FAILURE);
+	i = 0;
+	j = 0;
+	if (!my_strcmp(op, "!"))
+	{
+		free(op);
+		parseer.check = SUCCESS;
+		return (getFunc(NULL, words));
+	}
+	if (!my_strcmp(op, "!!"))
+	{
+		i = getVal(words);
+		free(op);
+		parseer.check = SUCCESS;
+		return (i);
+	}
+	comp = compArg(op, ptr);
+	if (comp != FAILURE)
+	{
+		i = getVal(words);
+		j = getVal(words);
+		res = ptr[comp].op(i, j);
+		parseer.check = SUCCESS;
+	}
+	free(op);
+	return (res);
 }
 
 static int lookVar(char **words)
 {
-  char *hash;
-  int *adr;
-  int comp;
+	char *hash;
+	int *adr;
+	int comp;
 
-  testNULL(words);
-  comp = 0;
-  if (isJustInt(words[parseer.words])){
-      parseer.check = SUCCESS;
-      return (my_getnbr(words[parseer.words], FAILURE));
-  } else if (isJustChar(words[parseer.words]) == SUCCESS){
-      parseer.check = SUCCESS;
-      return (words[parseer.words][1]);
-  }
-  hash = getOnlyName(words[parseer.words]);
-  while (comp < NB_VAR)
-    {
-      if (words[parseer.words][0] == varSyn[comp].str[0])
+	testNULL(words);
+	comp = 0;
+	if (isJustInt(words[parseer.words])){
+		parseer.check = SUCCESS;
+		return (my_getnbr(words[parseer.words], FAILURE));
+	} else if (isJustChar(words[parseer.words]) == SUCCESS){
+		parseer.check = SUCCESS;
+		return (words[parseer.words][1]);
+	}
+	hash = getOnlyName(words[parseer.words]);
+	while (comp < NB_VAR)
+	{
+		if (words[parseer.words][0] == varSyn[comp].str[0])
 		{
-      parseer.check = SUCCESS;
-		  adr = varSyn[comp].var(hash);
-	  	  return (*adr);
+			parseer.check = SUCCESS;
+			adr = varSyn[comp].var(hash);
+			return (*adr);
 		}
-      comp++;
-    }
-  free(hash);
-  parseer.check = FAILURE;
-  return (FAILURE);
+		comp++;
+	}
+	free(hash);
+	parseer.check = FAILURE;
+	return (FAILURE);
 }
 
 int getVal(char **words)
 {
-  int value;
-  t_type type = _int;
-  t_var *var;
+	int value;
+	t_type type = _int;
+	t_var *var;
 
-  parseer.words++;
-  value = 0;
-  parseer.string = 0;
-  mem.var_stack[0].name = NULL;
-  testNULL(words);
-  if (!my_strcmp(words[parseer.words], "(")
-      || !my_strcmp(words[parseer.words], ")"))
-    parseer.words++;
-  value = execOp(words);
-  if (parseer.check == FAILURE)
-    {
-      value = lookVar(words);
-      type = getType(words);
-      if (parseer.check == FAILURE)
-        perrorPars(words, SYN_ERR);  
-    }
-  parseer.check = FAILURE;
-  if (type == _char)
-    return ((char)value);
-  else if (type == _string)
-  {
-    if (mem.var_stack)
-      free(mem.var_stack);
-    var = getVarFromPart(words);
-    if ((mem.var_stack = malloc(sizeof(t_var) * (memLen(var) + 1))) == NULL)
-      perrorPars(words, M_FAIL);
-    if (memCopy(mem.var_stack, var) == FAILURE)
-      perrorPars(words, "Copy failed");
-    parseer.string = 1;
-    freeVar(var);
-    return ((int)value);
-  }
-  else
-    return ((int)value);
+	parseer.words++;
+	value = 0;
+	parseer.string = 0;
+	mem.var_stack[0].name = NULL;
+	testNULL(words);
+	if (!my_strcmp(words[parseer.words], "(") || !my_strcmp(words[parseer.words], ")"))
+		parseer.words++;
+	value = execOp(words);
+	if (parseer.check == FAILURE)
+	{
+		value = lookVar(words);
+		type = getType(words);
+		if (parseer.check == FAILURE)
+			perrorPars(words, SYN_ERR);
+	}
+	parseer.check = FAILURE;
+	if (type == _char)
+		return ((char)value);
+	else if (type == _string)
+	{
+		if (mem.var_stack)
+			free(mem.var_stack);
+		var = getVarFromPart(words);
+		if ((mem.var_stack = malloc(sizeof(t_var) * (memLen(var) + 1))) == NULL)
+			perrorPars(words, M_FAIL);
+		if (memCopy(mem.var_stack, var) == FAILURE)
+			perrorPars(words, "Copy failed");
+		parseer.string = 1;
+		freeVar(var);
+		return ((int)value);
+	}
+	else
+		return ((int)value);
 }

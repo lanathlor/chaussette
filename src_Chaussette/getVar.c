@@ -121,7 +121,7 @@ t_var *getVarFromPart(char **words)
 	free(name);
 	free(name_array);
 	free(name_struct);
-	return (var);	
+	return (var);
 }
 
 t_var *getVarFromPartName(char *var_name)
@@ -155,5 +155,5 @@ t_var *getVarFromPartName(char *var_name)
 	free(name);
 	free(name_array);
 	free(name_struct);
-	return (var);	
+	return (var);
 }

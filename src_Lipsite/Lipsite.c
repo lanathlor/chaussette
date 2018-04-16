@@ -1,9 +1,9 @@
 /*
 ** Lipsite.c for Lipsite in /home/vivier_v/jeux/Lipsite
-** 
+**
 ** Made by valetin vivier
 ** Login   <vivier_v@epitech.net>
-** 
+**
 ** Started on  Thu Sep  8 13:30:30 2016 valetin vivier
 ** Last update Thu Sep  8 13:36:52 2016 valetin vivier
 */
@@ -492,7 +492,7 @@ static p_item copyItem(t_item *item)
 
   i = 0;
   if (item == NULL)
-    return (NULL);  
+    return (NULL);
   newItem = createItem();
   while (item[i].element && item[i].value){
     newItem = reallocStructItem(newItem);

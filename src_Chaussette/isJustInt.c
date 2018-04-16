@@ -1,4 +1,4 @@
-#include "libmy.h" 
+#include "libmy.h"
 
 int isJustInt(char *str)
 {

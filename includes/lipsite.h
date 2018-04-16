@@ -24,7 +24,7 @@ int	freeItem (t_item *item);
 /* Free the codex's infos */
 void	freeCodex(t_codex *codex);
 
-/* link types with respective name in string string (format is : initCodex("ex1 ex2", name1, name2)*/ 
+/* link types with respective name in string string (format is : initCodex("ex1 ex2", name1, name2)*/
 t_codex	*initCodex(char *types, .../* char * */);
 
 /* add an entry in the codex */
