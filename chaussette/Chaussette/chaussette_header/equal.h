@@ -1,7 +1,7 @@
 #ifndef EQUAL_H_
 # define EQUAL_H_
 
-#include "usable.h"
+#include "Chaussette/chaussette_header/usable.h"
 
 //function
 char *getOnlyName(char *words);

@@ -1,0 +1,11 @@
+<name="putstr_rec", arguments="str nb", function="
+? if == $str[$nb] 0;
+	! return 0;
+? endif;
+! ascii $str[$nb];
+! putstr_rec($str, + $nb 1);
+! return 1;
+">
+<name="putstr", arguments="str", function="
+! putstr_rec($str 0);
+">

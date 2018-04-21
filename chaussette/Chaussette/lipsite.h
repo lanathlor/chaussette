@@ -1,7 +1,7 @@
 #ifndef LIPSITE_H_
 # define LIPSITE_H_
 
-#include "inner.h"
+#include "Chaussette/inner.h"
 
 /* readItem find and read info about the item set-uped with setItemInfo */
 /* read as many item that it can, one by one */
@@ -53,5 +53,16 @@ t_item	*getInfo(char *info);
 p_item *reallocItem(p_item *item, p_item add);
 
 p_item readItem(void);
+
+t_item     *duplicateFromRecipe(t_item *recipe, char **data);
+
+int 	appendItem(t_item *item);
+
+int     appendMagicNb(void);
+
+int     verifyMagicNb(void);
+
+p_item 	copyItem(const t_item *item);
+
 
 #endif

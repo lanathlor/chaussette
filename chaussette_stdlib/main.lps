@@ -1,0 +1,12 @@
+<name="main", function="
+= $str1 ! dump hello;
+= $str2 ! dump world;
+= $str1 ! strcat($str1, $str2);
+! putstr($str1);
+! write '\n';
+! write ! strcmp($str1, $str2) '\n';
+= $str1 ! dump test;
+= $str2 ! dump test;
+! write ! strcmp($str1, $str2) '\n';
+! return 1;
+">

@@ -1,0 +1,13 @@
+<name="strcat_rec", arguments="dest src len i", function="
+? if == $src[$i] 0;
+	! return $dest;
+? endif;
+= $tmp + $len $i;
+= $dest[$tmp] $src[$i];
+! return ! strcat_rec($dest, $src, $len, + $i 1);
+">
+<name="strcat", arguments="dest src", function="
+= $len ! strlen($dest);
+= $dest ! strcat_rec($dest, $src, $len, 0);
+! return $dest;
+">

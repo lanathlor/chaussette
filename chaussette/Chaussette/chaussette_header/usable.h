@@ -1,7 +1,7 @@
 #ifndef USABLE_H_
 # define USABLE_H_
 
-#include "lipsite.h"
+#include "Chaussette/lipsite.h"
 
 # define NB_VAR (4)
 # define NB_BOOL (3)
@@ -29,7 +29,7 @@ typedef struct s_parseer
   int cond;
   int string;
   int verbose;
-  int preload;  
+  int preload;
 }			t_parseer;
 
 typedef enum s_type

@@ -38,16 +38,16 @@
 # define UA_C ('A')
 # define UZ_C ('Z')
 
-#include "chaussette_header/equal.h"
-#include "chaussette_header/findVar.h"
-#include "chaussette_header/findType.h"
-#include "chaussette_header/getVar.h"
-#include "chaussette_header/getFunc.h"
-#include "chaussette_header/builtIn.h"
-#include "chaussette_header/Operat.h"
-#include "chaussette_header/condHandle.h"
-#include "chaussette_header/getALLvar.h"
-#include "chaussette_header/isJustInt.h"
+#include "Chaussette/chaussette_header/equal.h"
+#include "Chaussette/chaussette_header/findVar.h"
+#include "Chaussette/chaussette_header/findType.h"
+#include "Chaussette/chaussette_header/getVar.h"
+#include "Chaussette/chaussette_header/getFunc.h"
+#include "Chaussette/chaussette_header/builtIn.h"
+#include "Chaussette/chaussette_header/Operat.h"
+#include "Chaussette/chaussette_header/condHandle.h"
+#include "Chaussette/chaussette_header/getALLvar.h"
+#include "Chaussette/chaussette_header/isJustInt.h"
 
 /*
 ** my_strtowordtab.c

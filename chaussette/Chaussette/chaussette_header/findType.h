@@ -1,7 +1,7 @@
 #ifndef FINDTYPE_H_
 # define FINDTYPE_H_
 
-#include "Chaussette.h"
+#include "Chaussette/Chaussette.h"
 
 // function
 t_type TtoC(char *var);

@@ -74,7 +74,7 @@ OBJS_INT	= $(MAIN_INT:.c=.o)
 
 CFLAGS		+= -W -Wall -Werror -Wextra -fPIC
 
-CFLAGS		+= -Iincludes -Ilib/my
+CFLAGS		+= -I. -IChaussette -Ilib/my
 
 $(NAME)		: $(OBJS) $(OBJS_MAIN)
 		  $(CC) $(OBJS) $(OBJS_MAIN) $(CFLAGS) -o $(NAME)
@@ -96,13 +96,9 @@ linked 		: $(OBJS)
 
 install 	: re linked
 		  $(CP) $(NAME) /bin
-		  $(RM) /usr/include/chaussette_header
-		  $(MKDIR) /usr/include/chaussette_header
-		  $(CP) Makefile /usr/include/chaussette_header/.
-		  $(CP) includes/*.h /usr/include/chaussette_header/.
-		  $(CP) main/interpreter.c /usr/include/chaussette_header/.
-		  $(CP) includes/Chaussette.h /usr/include/.
-		  $(CP) libchaussette.so* /usr/include/chaussette_header/.
+		  $(RM) /usr/include/Chaussette
+		  $(MKDIR) /usr/include/Chaussette
+		  $(CP) Chaussette/* /usr/include/Chaussette/.
 		  $(CP) libchaussette.so* /usr/lib/.
 		  $(CP) libchaussette.so* /lib/.
 		  $(CP) $(NAME) /usr/bin
@@ -113,7 +109,7 @@ install 	: re linked
 uninstall 	: fclean
 		  $(RM) /bin/$(NAME)
 		  $(RM) /usr/include/Chaussette.h
-		  $(RM) /usr/include/chaussette_header
+		  $(RM) /usr/include/chaussette
 		  $(RM) /usr/bin/$(NAME)
 		  $(RM) /usr/lib/libchaussette.so*
 		  $(RM) /lib/libchaussette.so

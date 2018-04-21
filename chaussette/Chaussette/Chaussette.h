@@ -1,7 +1,7 @@
 #ifndef CHAUSSETTE_H_
 	#define CHAUSSETTE_H_
 
-#include <chaussette_header/usable.h>
+#include <Chaussette/chaussette_header/usable.h>
 
 // define
 #define SYN_ERR ("is not a syntax")

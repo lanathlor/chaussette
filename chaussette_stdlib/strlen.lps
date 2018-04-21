@@ -1,0 +1,9 @@
+<name="strlen_rec", arguments="str nb", function="
+? if == $str[$nb] 0;
+	! return $nb;
+? endif;
+! return ! strlen_rec($str, + $nb 1);
+">
+<name="strlen", arguments="str", function="
+! return ! strlen_rec($str, 0);
+">
